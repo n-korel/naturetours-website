@@ -2,9 +2,11 @@ import TourCard from './TourCard';
 import { getTours } from '../_lib/data-service';
 
 export default async function TourList() {
-	console.log('Starting...');
 	const tours = await getTours();
-	console.log(tours);
+
+	if (!tours.results) {
+		return null;
+	}
 
 	return (
 		<div className="max-w-7xl mx-auto px-6">
