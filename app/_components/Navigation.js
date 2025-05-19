@@ -45,6 +45,17 @@ export default function Navigation() {
 				</li>
 				<li>
 					<Link
+						href="/reviews"
+						className={clsx(
+							'transition hover:text-orange',
+							pathname === '/reviews' && 'text-orange font-semibold',
+						)}
+					>
+						Reviews
+					</Link>
+				</li>
+				<li>
+					<Link
 						href="/faq"
 						className={clsx(
 							'transition hover:text-orange',
