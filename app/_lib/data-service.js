@@ -9,3 +9,23 @@ export const getTours = async function () {
 
 	return res.json();
 };
+
+export const getTour = async function (id) {
+	const res = await fetch(`${API_URL}api/v1/tours/${id}`);
+
+	if (!res.ok) {
+		throw new Error('Tour could not be loaded');
+	}
+
+	return res.json();
+};
+
+export const getTourId = async function (slug) {
+	const res = await fetch(`${API_URL}api/v1/tours?slug=${slug}`);
+
+	if (!res.ok) {
+		throw new Error('Tour could not be loaded');
+	}
+
+	return res.json();
+};
