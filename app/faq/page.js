@@ -8,8 +8,8 @@ export const metadata = {
 export default function Page() {
 	return (
 		<main className="bg-beige">
-			<section className="relative max-w-6xl mx-auto px-6 py-16">
-				<div className="relative h-[500px] w-full rounded-xl overflow-hidden shadow-xl">
+			<section className="relative mx-auto max-w-6xl px-6 py-16">
+				<div className="relative h-[500px] w-full overflow-hidden rounded-xl shadow-xl">
 					<Image
 						src={faq}
 						alt="FAQ"

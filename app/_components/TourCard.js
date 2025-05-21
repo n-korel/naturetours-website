@@ -16,8 +16,8 @@ export default function TourCard({ tour }) {
 
 	return (
 		<Link href={`/tours/${tour.slug}`} className="block">
-			<div className="rounded-xl overflow-hidden shadow-md flex flex-col cursor-pointer hover:brightness-95 transition-shadow duration-300">
-				<div className="h-40 relative">
+			<div className="flex cursor-pointer flex-col overflow-hidden rounded-xl shadow-md transition-shadow duration-300 hover:brightness-95">
+				<div className="relative h-40">
 					<Image
 						src={`/img/tours/${tour.imageCover}`}
 						alt={tour.name}
@@ -26,11 +26,11 @@ export default function TourCard({ tour }) {
 					/>
 				</div>
 
-				<div className={clsx('p-4 flex-1 flex flex-col justify-between', bgColor)}>
-					<h3 className="font-semibold text-textdark text-lg leading-snug">{tour.name}</h3>
+				<div className={clsx('flex flex-1 flex-col justify-between p-4', bgColor)}>
+					<h3 className="text-lg font-semibold leading-snug text-textdark">{tour.name}</h3>
 					<p className="text-sm text-textdark">{tour.startLocation.description}</p>
-					<p className="text-sm mt-2">{format(new Date(tour.startDates[0]), 'MMMM yyyy')}</p>
-					<p className="text-textdark text-base mt-2 text-right">from €{tour.price}</p>
+					<p className="mt-2 text-sm">{format(new Date(tour.startDates[0]), 'MMMM yyyy')}</p>
+					<p className="mt-2 text-right text-base text-textdark">from €{tour.price}</p>
 				</div>
 			</div>
 		</Link>

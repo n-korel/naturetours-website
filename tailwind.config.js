@@ -24,6 +24,9 @@ module.exports = {
 					600: '#B78343',
 				},
 			},
+			height: {
+				screen: '100dvh',
+			},
 		},
 	},
 	plugins: [],

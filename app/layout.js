@@ -21,7 +21,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
 	return (
 		<html lang="en">
-			<body className={`${manrope.className} bg-beige text-textdark min-h-screen flex flex-col`}>
+			<body className={`${manrope.className} flex h-screen flex-col bg-beige text-textdark`}>
 				<Header />
 				<main className="flex-1 pt-[80px]">{children}</main>
 				<Footer />

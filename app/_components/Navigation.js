@@ -9,13 +9,13 @@ export default function Navigation() {
 
 	return (
 		<nav>
-			<ul className="flex gap-6 text-lg text-textdark font-medium">
+			<ul className="flex gap-6 text-lg font-medium text-textdark">
 				<li>
 					<Link
 						href="/"
 						className={clsx(
 							'transition hover:text-orange',
-							pathname === '/' && 'text-orange font-semibold',
+							pathname === '/' && 'font-semibold text-orange',
 						)}
 					>
 						Home
@@ -26,7 +26,7 @@ export default function Navigation() {
 						href="/tours"
 						className={clsx(
 							'transition hover:text-orange',
-							pathname === '/tours' && 'text-orange font-semibold',
+							pathname === '/tours' && 'font-semibold text-orange',
 						)}
 					>
 						All Tours
@@ -37,7 +37,7 @@ export default function Navigation() {
 						href="/guides"
 						className={clsx(
 							'transition hover:text-orange',
-							pathname === '/guides' && 'text-orange font-semibold',
+							pathname === '/guides' && 'font-semibold text-orange',
 						)}
 					>
 						Our Guides
@@ -48,7 +48,7 @@ export default function Navigation() {
 						href="/reviews"
 						className={clsx(
 							'transition hover:text-orange',
-							pathname === '/reviews' && 'text-orange font-semibold',
+							pathname === '/reviews' && 'font-semibold text-orange',
 						)}
 					>
 						Reviews
@@ -59,7 +59,7 @@ export default function Navigation() {
 						href="/faq"
 						className={clsx(
 							'transition hover:text-orange',
-							pathname === '/faq' && 'text-orange font-semibold',
+							pathname === '/faq' && 'font-semibold text-orange',
 						)}
 					>
 						FAQ

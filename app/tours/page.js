@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function Page() {
 	return (
-		<main className="bg-beige text-textdark font-sans pb-10">
+		<main className="bg-beige pb-10 font-sans text-textdark">
 			<Filters />
 
 			<Suspense fallback={<Spinner />}>

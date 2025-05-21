@@ -7,8 +7,8 @@ export default function ImageGallery({ tour }) {
 	const [selectedImage, setSelectedImage] = useState(tour.images[0]);
 
 	return (
-		<div className="mt-8">
-			<div className="relative w-full h-[300px] rounded-lg overflow-hidden shadow-md">
+		<div>
+			<div className="relative h-[300px] w-full overflow-hidden rounded-lg shadow-md">
 				<Image
 					src={`/img/tours/${selectedImage}`}
 					alt={tour.name}
@@ -17,14 +17,14 @@ export default function ImageGallery({ tour }) {
 				/>
 			</div>
 
-			<div className={`grid gap-2 grid-cols-3`}>
+			<div className={`mt-2 grid grid-cols-3 gap-2`}>
 				{tour.images.map((img, index) => (
 					<button
 						type="button"
 						key={index}
 						onClick={() => setSelectedImage(img)}
-						className={`relative h-20 rounded overflow-hidden shadow-sm border transition hover:opacity-80 ${
-							selectedImage === img ? 'ring-2 ring-primary' : 'border-gray-200'
+						className={`relative h-20 overflow-hidden rounded border shadow-sm transition hover:opacity-80 ${
+							selectedImage === img ? 'ring-primary ring-2' : 'border-gray-200'
 						}`}
 						aria-label={`Выбрать изображение ${index + 1}`}
 					>
