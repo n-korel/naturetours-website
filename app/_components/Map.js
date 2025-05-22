@@ -4,6 +4,7 @@ import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { useEffect, useState } from 'react';
+import { Compass } from 'lucide-react';
 
 // Иконки по умолчанию
 delete L.Icon.Default.prototype._getIconUrl;
@@ -95,7 +96,6 @@ export default function Map({ locations }) {
 					);
 				})}
 
-				{/* Маркер местоположения */}
 				{userPosition && (
 					<Marker
 						position={userPosition}
@@ -115,7 +115,6 @@ export default function Map({ locations }) {
 					/>
 				)}
 
-				{/* Кнопка геолокации */}
 				<LocateControl setUserPosition={setUserPosition} />
 			</MapContainer>
 		</div>

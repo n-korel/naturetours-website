@@ -6,9 +6,7 @@ function FactsTour({ tour }) {
 	return (
 		<div className="flex flex-col items-center justify-center">
 			<div className="mb-8">
-				<h2 className="mb-4 text-lg font-semibold uppercase tracking-wide text-orange">
-					Quick facts
-				</h2>
+				<h2 className="mb-4 text-lg font-bold uppercase text-orange">Quick facts</h2>
 
 				<ul className="space-y-4 text-sm">
 					<li className="flex items-center gap-3">
@@ -35,9 +33,7 @@ function FactsTour({ tour }) {
 			</div>
 
 			<div>
-				<h2 className="mb-4 text-lg font-semibold uppercase tracking-wide text-orange">
-					Your tour guides
-				</h2>
+				<h2 className="mb-4 text-lg font-bold uppercase text-orange">Your tour guides</h2>
 
 				<ul className="space-y-4 text-sm">
 					{tour.guides.map((guide) => (

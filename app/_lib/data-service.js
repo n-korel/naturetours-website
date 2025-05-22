@@ -24,6 +24,7 @@ export const getTourId = async function (slug) {
 	const res = await fetch(`${API_URL}api/v1/tours?slug=${slug}`);
 
 	if (!res.ok) {
+		console.error(error);
 		throw new Error('Tour could not be loaded');
 	}
 
