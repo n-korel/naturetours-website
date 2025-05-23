@@ -1,32 +1,65 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const getTours = async function () {
-	const res = await fetch(`${API_URL}api/v1/tours`);
+	try {
+		const res = await fetch(`${API_URL}api/v1/tours`, {
+			next: { revalidate: 60 },
+		});
 
-	if (!res.ok) {
-		throw new Error('Tours could not be loaded');
+		if (!res.ok) {
+			return null;
+		}
+
+		const json = await res.json();
+		const tours = json.data?.data;
+
+		return tours;
+	} catch (error) {
+		console.error(error);
+		return null;
 	}
-
-	return res.json();
 };
 
 export const getTour = async function (id) {
-	const res = await fetch(`${API_URL}api/v1/tours/${id}`);
+	try {
+		const res = await fetch(`${API_URL}api/v1/tours/${id}`, {
+			next: { revalidate: 60 },
+		});
 
-	if (!res.ok) {
-		throw new Error('Tour could not be loaded');
+		if (!res.ok) {
+			return null;
+		}
+
+		const json = await res.json();
+		const tour = json.data?.data;
+
+		return tour;
+	} catch (error) {
+		console.error(error);
+		return null;
 	}
-
-	return res.json();
 };
 
 export const getTourId = async function (slug) {
-	const res = await fetch(`${API_URL}api/v1/tours?slug=${slug}`);
+	try {
+		const res = await fetch(`${API_URL}api/v1/tours?slug=${slug}`, {
+			next: { revalidate: 60 },
+		});
 
-	if (!res.ok) {
+		if (!res.ok) {
+			return null;
+		}
+
+		const json = await res.json();
+		const tourId = json.data?.data?.[0];
+
+		if (!tourId) {
+			return null;
+		}
+
+		return tourId;
+	} catch (error) {
 		console.error(error);
-		throw new Error('Tour could not be loaded');
+		return null;
 	}
-
-	return res.json();
 };

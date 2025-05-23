@@ -1,28 +1,48 @@
-import { getTour, getTourId } from '@/app/_lib/data-service';
+import { getTour, getTourId, getTours } from '@/app/_lib/data-service';
 
 import ImageGallery from '@/app/_components/ImageGallery';
 import MainImage from '@/app/_components/MainImage';
 import FactsTour from '@/app/_components/FactsTour';
 import dynamic from 'next/dynamic';
 import ReviewsCarousel from '@/app/_components/ReviewsCarousel';
+import { notFound } from 'next/navigation';
+
+const Map = dynamic(() => import('@/app/_components/Map'), {
+	ssr: false, // Leaflet требует отключить SSR
+});
+
+export const revalidate = 60;
 
 export async function generateMetadata({ params }) {
 	const tourId = await getTourId(params.tour);
-	const data = await getTour(tourId.data.data[0].id);
 
-	const { name } = data.data.data;
-	return { title: name };
+	if (!tourId) {
+		notFound();
+	}
+
+	const tour = await getTour(tourId.id);
+
+	return { title: tour.name };
 }
 
-const Map = dynamic(() => import('@/app/_components/Map'), {
-	ssr: false,
-});
+export async function generateStaticParams() {
+	const tours = await getTours();
+
+	const slugs = tours.map((tour) => ({
+		tour: String(tour.slug),
+	}));
+
+	return slugs;
+}
 
 export default async function Page({ params }) {
 	const tourId = await getTourId(params.tour);
-	const data = await getTour(tourId.data.data[0].id);
 
-	const tour = data.data.data;
+	if (!tourId) {
+		notFound();
+	}
+
+	const tour = await getTour(tourId.id);
 
 	return (
 		<main className="bg-beige font-sans text-textdark">
