@@ -8,14 +8,12 @@ export const metadata = {
 };
 
 export default function Page({ searchParams }) {
-	console.log(searchParams);
-
 	return (
 		<main className="bg-beige pb-10 font-sans text-textdark">
 			<Filters />
 
 			<Suspense fallback={<Spinner />}>
-				<TourList />
+				<TourList searchParams={searchParams} />
 			</Suspense>
 		</main>
 	);

@@ -1,8 +1,34 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export const getTours = async function () {
+/* export const getTours = async function () {
 	try {
 		const res = await fetch(`${API_URL}api/v1/tours`, {
+			next: { revalidate: 60 },
+		});
+
+		if (!res.ok) {
+			return null;
+		}
+
+		const json = await res.json();
+		const tours = json.data?.data;
+
+		return tours;
+	} catch (error) {
+		console.error(error);
+		return null;
+	}
+}; */
+
+export const getTours = async function (searchParams) {
+	const params = new URLSearchParams();
+
+	if (searchParams.difficulty) {
+		params.set('difficulty', searchParams.difficulty);
+	}
+
+	try {
+		const res = await fetch(`${API_URL}api/v1/tours?${params.toString()}`, {
 			next: { revalidate: 60 },
 		});
 
