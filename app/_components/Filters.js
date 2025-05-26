@@ -1,4 +1,4 @@
-const filters = ['Dates', 'Guests', 'Location', 'Transfer type', 'Price'];
+const filters = ['Month', 'Year', 'Duration', 'Difficulty', 'Rating', 'Price'];
 
 export default function Filters() {
 	return (

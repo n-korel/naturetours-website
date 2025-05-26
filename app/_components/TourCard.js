@@ -2,6 +2,7 @@ import Image from 'next/image';
 import clsx from 'clsx';
 import { format } from 'date-fns';
 import Link from 'next/link';
+import { Calendar, Clock, Globe2, Globe2Icon, Star } from 'lucide-react';
 
 // const BASE_IMAGE_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -26,11 +27,28 @@ export default function TourCard({ tour }) {
 					/>
 				</div>
 
-				<div className={clsx('flex flex-1 flex-col justify-between p-4', bgColor)}>
+				<div className={clsx('flex flex-col gap-2 p-4', bgColor)}>
 					<h3 className="text-lg font-semibold leading-snug text-textdark">{tour.name}</h3>
-					<p className="text-sm text-textdark">{tour.startLocation.description}</p>
-					<p className="mt-2 text-sm">{format(new Date(tour.startDates[0]), 'MMMM yyyy')}</p>
-					<p className="mt-2 text-right text-base text-textdark">from €{tour.price}</p>
+
+					<div className="flex items-center text-sm">
+						<Globe2 className="mr-1 h-4 w-4" />
+						<span className="mr-4 text-textdark">{tour.startLocation.description}</span>
+						<Clock className="mr-1 h-4 w-4" />
+						<p className="text-textdark">{tour.duration} Days</p>
+					</div>
+
+					<div className="flex items-center text-sm">
+						<Calendar className="mr-1 h-4 w-4" />
+						<p className="text-sm">{format(new Date(tour.startDates[0]), 'MMMM yyyy')}</p>
+					</div>
+
+					<div className="flex items-center text-sm">
+						<Star className="mr-1 h-4 w-4 fill-yellow-400 text-yellow-400" />
+						<span className="mr-1">{tour.ratingsAverage.toFixed(1)}</span>
+						<span className="text-gray-500">({tour.ratingsQuantity.toLocaleString()})</span>
+					</div>
+
+					<p className="text-right text-base text-textdark">from ${tour.price}</p>
 				</div>
 			</div>
 		</Link>

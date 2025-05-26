@@ -7,7 +7,9 @@ export const metadata = {
 	title: 'All tours',
 };
 
-export default function Page() {
+export default function Page({ searchParams }) {
+	console.log(searchParams);
+
 	return (
 		<main className="bg-beige pb-10 font-sans text-textdark">
 			<Filters />

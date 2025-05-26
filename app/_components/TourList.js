@@ -16,9 +16,9 @@ export default async function TourList() {
 					<TourCard key={tour.id} tour={tour} />
 				))}
 			</div>
-			<div className="mt-6 text-center">
+			{/* 			<div className="mt-6 text-center">
 				<button className="font-semibold text-orange underline">Load more</button>
-			</div>
+			</div> */}
 		</div>
 	);
 }

@@ -11,7 +11,7 @@ const Map = dynamic(() => import('@/app/_components/Map'), {
 	ssr: false, // Leaflet требует отключить SSR
 });
 
-export const revalidate = 60;
+export const revalidate = 3600;
 
 export async function generateMetadata({ params }) {
 	const tourId = await getTourId(params.tour);
