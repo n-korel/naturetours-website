@@ -1,4 +1,4 @@
-import { getTour, getTourId, getTours } from '@/app/_lib/data-service';
+import { getTour, getTourId, getTours, getToursSSG } from '@/app/_lib/data-service';
 
 import ImageGallery from '@/app/_components/ImageGallery';
 import MainImage from '@/app/_components/MainImage';
@@ -26,7 +26,7 @@ export async function generateMetadata({ params }) {
 }
 
 export async function generateStaticParams() {
-	const tours = await getTours();
+	const tours = await getToursSSG();
 
 	const slugs = tours.map((tour) => ({
 		tour: String(tour.slug),

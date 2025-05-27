@@ -2,7 +2,6 @@ import TourCard from './TourCard';
 import { getTours } from '../_lib/data-service';
 
 export default async function TourList({ searchParams }) {
-	// const tours = await getTours();
 	const tours = await getTours(searchParams);
 
 	if (!tours.length) {
