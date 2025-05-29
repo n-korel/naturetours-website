@@ -1,11 +1,13 @@
+import LoginForm from '../_components/LoginForm';
+
 export const metadata = {
 	title: 'Log in',
 };
 
 export default function Page() {
 	return (
-		<div>
-			<h1>Log in</h1>
+		<div className="flex h-full items-center justify-center">
+			<LoginForm />
 		</div>
 	);
 }

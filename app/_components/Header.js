@@ -1,3 +1,4 @@
+import AuthButtons from './AuthButtons';
 import Logo from './Logo';
 import Navigation from './Navigation';
 
@@ -12,12 +13,7 @@ function Header() {
 				</div>
 
 				<div className="flex items-center gap-2 sm:gap-4">
-					<button className="rounded-full px-4 py-2 text-sm text-textdark transition hover:bg-lightgray sm:text-lg">
-						Log in
-					</button>
-					<button className="rounded-full bg-orange px-4 py-2 text-sm text-white transition hover:opacity-90 sm:text-lg">
-						Sign up
-					</button>
+					<AuthButtons />
 				</div>
 			</div>
 		</header>
