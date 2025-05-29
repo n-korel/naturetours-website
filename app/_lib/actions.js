@@ -16,12 +16,10 @@ export async function LoginUser(formData) {
 		});
 
 		if (!res.ok) {
-			return null;
+			return { success: false, message: 'Invalid email or password' };
 		}
 
 		const data = await res.json();
-
-		console.log(data);
 
 		const cookieStore = cookies();
 		cookieStore.set('token', data.token, {
@@ -31,10 +29,10 @@ export async function LoginUser(formData) {
 			maxAge: 60 * 60 * 24 * 7, // 1 week
 		});
 
-		return data;
+		return { success: true, message: 'Login successful!' };
 	} catch (error) {
 		console.error(error);
-		return null;
+		return { success: false, message: 'Something went wrong' };
 	}
 }
 
@@ -52,7 +50,7 @@ export async function signupUser(formData) {
 		});
 
 		if (!res.ok) {
-			return null;
+			return { success: false, message: 'Invalid email or password' };
 		}
 
 		const data = await res.json();
@@ -65,9 +63,9 @@ export async function signupUser(formData) {
 			maxAge: 60 * 60 * 24 * 7, // 1 week
 		});
 
-		return data;
+		return { success: true, message: 'Sign up successful!' };
 	} catch (error) {
 		console.error(error);
-		return null;
+		return { success: false, message: 'Something went wrong' };
 	}
 }
