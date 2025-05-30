@@ -4,9 +4,11 @@ import Link from 'next/link';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { LoginUser } from '../_lib/actions';
+import { useRouter } from 'next/navigation';
 
 export default function LoginForm() {
 	const [loading, setLoading] = useState(false);
+	const router = useRouter();
 
 	async function handleSubmit(e) {
 		e.preventDefault();
@@ -19,6 +21,13 @@ export default function LoginForm() {
 
 		if (result.success) {
 			toast.success(result.message);
+			setTimeout(() => {
+				if (window.history.length > 2) {
+					router.back();
+				} else {
+					router.push('/');
+				}
+			}, 1000);
 		} else {
 			toast.error(result.message);
 		}

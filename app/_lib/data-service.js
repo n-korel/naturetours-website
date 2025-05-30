@@ -1,3 +1,5 @@
+import { auth } from '../_lib/auth';
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const ratingRange = {
@@ -128,4 +130,71 @@ export const getTourId = async function (slug) {
 		console.error(error);
 		return null;
 	}
+};
+
+const getUserFromNextAuth = async function () {
+	try {
+		const session = await auth();
+
+		if (!session) {
+			return null;
+		}
+		const user = {
+			name: session.user.name,
+			email: session.user.email,
+			photo: session.user.image,
+			from: 'nextauth',
+		};
+		return user;
+	} catch (error) {
+		console.error(error);
+		return null;
+	}
+};
+
+const getUserFromApi = async function () {
+	try {
+		const cookieStore = cookies();
+		const token = cookieStore.get('token');
+
+		if (!token) {
+			return null;
+		}
+
+		const res = await fetch(`${API_URL}api/v1/users/me`, {
+			headers: {
+				Authorization: `Bearer ${token.value}`,
+			},
+		});
+
+		if (!res.ok) {
+			return null;
+		}
+
+		json = await res.json();
+		const apiUser = json.data?.data;
+		const user = {
+			name: apiUser.name,
+			email: apiUser.email,
+			photo: apiUser.photo,
+			from: 'api',
+		};
+
+		return user;
+	} catch (error) {
+		console.error(error);
+		return null;
+	}
+};
+
+export const getCurrentUser = async function () {
+	let user = null;
+
+	user = await getUserFromNextAuth();
+
+	if (!user) {
+		user = await getUserFromApi();
+	}
+
+	return user;
 };

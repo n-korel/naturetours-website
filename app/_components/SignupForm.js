@@ -19,6 +19,13 @@ export default function SignupForm() {
 
 		if (result.success) {
 			toast.success(result.message);
+			setTimeout(() => {
+				if (window.history.length > 2) {
+					router.back();
+				} else {
+					router.push('/');
+				}
+			}, 1000);
 		} else {
 			toast.error(result.message);
 		}
