@@ -1,6 +1,9 @@
 import Link from 'next/link';
+import LogoutForm from './LogoutForm';
 
 function AuthButtons({ user }) {
+	const firstName = user?.name?.split(' ').at(0);
+
 	return (
 		<div>
 			{user ? (
@@ -13,20 +16,12 @@ function AuthButtons({ user }) {
 					/>
 					<Link
 						href="/profile"
-						className="rounded-full px-4 py-2 text-sm text-textdark transition hover:bg-lightgray sm:text-lg"
+						className="rounded-full px-2 py-2 text-sm text-textdark transition hover:bg-lightgray sm:text-lg"
 					>
-						Profile
+						{firstName}
 					</Link>
 
-					{user.from === 'nextauth' ? (
-						<button className="rounded-full bg-orange px-4 py-2 text-sm text-white transition hover:opacity-90 sm:text-lg">
-							Logout1
-						</button>
-					) : (
-						<button className="rounded-full bg-orange px-4 py-2 text-sm text-white transition hover:opacity-90 sm:text-lg">
-							Logout2
-						</button>
-					)}
+					<LogoutForm user={user} />
 				</div>
 			) : (
 				<div>

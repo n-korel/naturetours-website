@@ -1,3 +1,4 @@
+import { cookies } from 'next/headers';
 import { auth } from '../_lib/auth';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -145,6 +146,7 @@ const getUserFromNextAuth = async function () {
 			photo: session.user.image,
 			from: 'nextauth',
 		};
+
 		return user;
 	} catch (error) {
 		console.error(error);
@@ -171,7 +173,7 @@ const getUserFromApi = async function () {
 			return null;
 		}
 
-		json = await res.json();
+		const json = await res.json();
 		const apiUser = json.data?.data;
 		const user = {
 			name: apiUser.name,

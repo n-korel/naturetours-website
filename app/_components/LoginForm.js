@@ -3,8 +3,9 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { LoginUser } from '../_lib/actions';
 import { useRouter } from 'next/navigation';
+import { loginUser } from '../_lib/actions';
+import { signInAction } from '../_lib/actions';
 
 export default function LoginForm() {
 	const [loading, setLoading] = useState(false);
@@ -15,18 +16,14 @@ export default function LoginForm() {
 		setLoading(true);
 
 		const formData = new FormData(e.target);
-		const result = await LoginUser(formData);
+		const result = await loginUser(formData);
 
 		setLoading(false);
 
 		if (result.success) {
 			toast.success(result.message);
 			setTimeout(() => {
-				if (window.history.length > 2) {
-					router.back();
-				} else {
-					router.push('/');
-				}
+				router.push('/profile');
 			}, 1000);
 		} else {
 			toast.error(result.message);
@@ -60,6 +57,18 @@ export default function LoginForm() {
 						className="w-full rounded-md bg-orange py-2 font-medium text-white transition hover:opacity-90"
 					>
 						{loading ? 'Logging in...' : 'Login'}
+					</button>
+				</form>
+
+				<form action={signInAction} className="mt-4">
+					<button className="border-primary-100 flex w-full items-center justify-center gap-3 rounded-md border py-2 font-medium transition hover:bg-gray-100">
+						<img
+							src="https://authjs.dev/img/providers/google.svg"
+							alt="Google logo"
+							height="24"
+							width="24"
+						/>
+						<span>Continue with Google</span>
 					</button>
 				</form>
 

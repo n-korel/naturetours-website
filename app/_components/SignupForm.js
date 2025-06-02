@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { signupUser } from '../_lib/actions';
+import { signInAction } from '../_lib/actions';
 
 export default function SignupForm() {
 	const [loading, setLoading] = useState(false);
@@ -20,11 +21,7 @@ export default function SignupForm() {
 		if (result.success) {
 			toast.success(result.message);
 			setTimeout(() => {
-				if (window.history.length > 2) {
-					router.back();
-				} else {
-					router.push('/');
-				}
+				router.push('/profile');
 			}, 1000);
 		} else {
 			toast.error(result.message);
@@ -71,6 +68,18 @@ export default function SignupForm() {
 						className="w-full rounded-md bg-orange py-2 font-medium text-white transition hover:opacity-90"
 					>
 						{loading ? 'Signing up...' : 'Sign up'}
+					</button>
+				</form>
+
+				<form action={signInAction} className="mt-4">
+					<button className="border-primary-100 flex w-full items-center justify-center gap-3 rounded-md border py-2 font-medium transition hover:bg-gray-100">
+						<img
+							src="https://authjs.dev/img/providers/google.svg"
+							alt="Google logo"
+							height="24"
+							width="24"
+						/>
+						<span>Continue with Google</span>
 					</button>
 				</form>
 

@@ -1,10 +1,11 @@
 'use server';
 
 import { cookies } from 'next/headers';
+import { signIn, signOut } from './auth';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export async function LoginUser(formData) {
+export async function loginUser(formData) {
 	try {
 		const email = formData.get('email');
 		const password = formData.get('password');
@@ -68,4 +69,17 @@ export async function signupUser(formData) {
 		console.error(error);
 		return { success: false, message: 'Something went wrong' };
 	}
+}
+
+export async function logoutUser() {
+	const cookieStore = cookies();
+	cookieStore.delete('token');
+}
+
+export async function signInAction() {
+	await signIn('google', { redirectTo: '/profile' });
+}
+
+export async function signOutAction() {
+	await signOut({ redirectTo: '/' });
 }
