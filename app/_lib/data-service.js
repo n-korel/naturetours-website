@@ -175,6 +175,7 @@ const getUserFromApi = async function () {
 
 		const json = await res.json();
 		const apiUser = json.data?.data;
+
 		const user = {
 			name: apiUser.name,
 			email: apiUser.email,

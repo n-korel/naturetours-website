@@ -51,6 +51,13 @@ export default function LoginForm() {
 						className="w-full border-b border-black bg-beige p-2 focus:outline-none"
 					/>
 
+					<Link
+						href="/forgotPassword"
+						className="flex items-start text-center text-sm text-orange hover:underline"
+					>
+						Forgot your password?
+					</Link>
+
 					<button
 						type="submit"
 						disabled={loading}

@@ -74,6 +74,7 @@ export async function signupUser(formData) {
 export async function logoutUser() {
 	const cookieStore = cookies();
 	cookieStore.delete('token');
+	await signOut({ redirectTo: '/' });
 }
 
 export async function signInAction() {
@@ -82,4 +83,26 @@ export async function signInAction() {
 
 export async function signOutAction() {
 	await signOut({ redirectTo: '/' });
+}
+
+export async function forgotPassword(formData) {
+	try {
+		const email = formData.get('email');
+		const res = await fetch(`${API_URL}api/v1/users/forgotPassword`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ email }),
+		});
+
+		if (!res.ok) {
+			return { success: false, message: 'Ошибка отправки email' };
+		}
+
+		return { success: true, message: 'Email отправлен!' };
+	} catch (error) {
+		console.error(error);
+		return { success: false, message: 'Something went wrong' };
+	}
 }

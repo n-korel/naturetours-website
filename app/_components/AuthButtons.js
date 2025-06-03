@@ -9,7 +9,7 @@ function AuthButtons({ user }) {
 			{user ? (
 				<div className="flex items-center gap-4">
 					<img
-						src={user.photo}
+						src={`/img/users/${user.photo}`}
 						alt={user.name}
 						className="h-8 w-8 rounded-full"
 						referrerPolicy="no-referrer"
