@@ -1,7 +1,11 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import LogoutForm from './LogoutForm';
 
 function AuthButtons({ user }) {
+	const pathname = usePathname();
 	const firstName = user?.name?.split(' ').at(0);
 
 	return (
@@ -9,14 +13,15 @@ function AuthButtons({ user }) {
 			{user ? (
 				<div className="flex items-center gap-4">
 					<img
-						src={`/img/users/${user.photo}`}
+						src={user.photo}
 						alt={user.name}
 						className="h-8 w-8 rounded-full"
 						referrerPolicy="no-referrer"
 					/>
+
 					<Link
 						href="/profile"
-						className="rounded-full px-2 py-2 text-sm text-textdark transition hover:bg-lightgray sm:text-lg"
+						className={`${pathname === '/profile' ? 'font-semibold text-orange' : 'text-textdark'} rounded-full px-4 py-2 text-sm transition hover:bg-lightgray hover:text-orange sm:text-lg`}
 					>
 						{firstName}
 					</Link>

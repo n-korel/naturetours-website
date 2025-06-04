@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -32,15 +31,12 @@ export default function Navigation() {
 
 	return (
 		<nav>
-			<ul className="flex gap-6 text-lg font-medium text-textdark">
+			<ul className="flex gap-6 text-lg font-medium">
 				{navLinks.map((link) => (
 					<li key={link.name}>
 						<Link
 							href={link.href}
-							className={clsx(
-								'transition hover:text-orange',
-								pathname === link.href && 'font-semibold text-orange',
-							)}
+							className={`${pathname === link.href ? 'font-semibold text-orange' : 'text-textdark'} transition hover:text-orange`}
 						>
 							<span>{link.name}</span>
 						</Link>

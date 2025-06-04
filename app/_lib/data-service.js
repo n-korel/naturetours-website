@@ -144,6 +144,7 @@ const getUserFromNextAuth = async function () {
 			name: session.user.name,
 			email: session.user.email,
 			photo: session.user.image,
+			role: 'user',
 			from: 'nextauth',
 		};
 
@@ -179,7 +180,8 @@ const getUserFromApi = async function () {
 		const user = {
 			name: apiUser.name,
 			email: apiUser.email,
-			photo: apiUser.photo,
+			photo: `/img/users/${apiUser.photo}`,
+			role: apiUser.role,
 			from: 'api',
 		};
 

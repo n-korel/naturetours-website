@@ -1,5 +1,6 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 import { signIn, signOut } from './auth';
 
@@ -101,6 +102,46 @@ export async function forgotPassword(formData) {
 		}
 
 		return { success: true, message: 'Email отправлен!' };
+	} catch (error) {
+		console.error(error);
+		return { success: false, message: 'Something went wrong' };
+	}
+}
+
+export async function updateUser(formData) {
+	try {
+		const name = formData.get('name');
+		const email = formData.get('email');
+		const photo = formData.get('photo');
+
+		const cookieStore = cookies();
+		const token = cookieStore.get('token');
+
+		if (!token?.value) {
+			return { success: false, message: 'Not authenticated' };
+		}
+
+		const body = new FormData();
+		body.append('name', name);
+		body.append('email', email);
+		if (photo && typeof photo === 'object' && 'arrayBuffer' in photo) {
+			body.append('photo', photo);
+		}
+
+		const res = await fetch(`${API_URL}api/v1/users/updateMe`, {
+			method: 'PATCH',
+			headers: { Authorization: `Bearer ${token.value}` },
+			body: body,
+		});
+
+		if (!res.ok) {
+			return { success: false, message: 'Invalid name, email or photo' };
+		}
+
+		revalidatePath('/');
+		revalidatePath('/profile');
+
+		return { success: true, message: 'Change successful!' };
 	} catch (error) {
 		console.error(error);
 		return { success: false, message: 'Something went wrong' };
