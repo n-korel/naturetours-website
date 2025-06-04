@@ -42,61 +42,69 @@ export default function UserProfileForm({ user }) {
 	};
 
 	return (
-		<div className="flex w-full flex-col items-center justify-center rounded-2xl border border-slate-400 shadow">
-			<h2 className="mb-6 text-center text-2xl font-bold text-textdark">Your account</h2>
+		<form
+			onSubmit={handleSubmit}
+			className="mx-auto my-8 flex max-w-4xl flex-col items-center gap-12 md:flex-row"
+		>
+			<div className="flex flex-col items-center gap-4">
+				<img
+					src={photoPreview}
+					alt="User avatar"
+					className="h-50 w-50 rounded-full object-cover shadow"
+				/>
 
-			<form onSubmit={handleSubmit} className="flex gap-4 space-y-6">
-				<div className="flex flex-col items-center space-x-4">
-					<img
-						src={photoPreview}
-						alt="User avatar"
-						className="h-16 w-16 rounded-full object-cover"
-					/>
+				<input
+					name="photo"
+					type="file"
+					accept="image/*"
+					ref={fileInputRef}
+					onChange={handlePhotoChange}
+					className="hidden"
+				/>
+				<button
+					type="button"
+					onClick={() => fileInputRef.current.click()}
+					className="text-sm font-medium text-green-700 underline hover:text-green-900"
+				>
+					Choose new photo
+				</button>
+			</div>
 
-					<div>
-						<input
-							name="photo"
-							type="file"
-							accept="image/*"
-							ref={fileInputRef}
-							onChange={handlePhotoChange}
-							className="hidden"
-						/>
-						<button
-							type="button"
-							onClick={() => fileInputRef.current.click()}
-							className="text-sm text-green-600 underline hover:text-green-800"
-						>
-							Choose new photo
-						</button>
-					</div>
-				</div>
+			<div className="flex w-full flex-col gap-6">
+				<h2 className="text-center text-3xl font-bold text-gray-800 md:text-left">Your Account</h2>
 
-				<div>
+				<div className="flex flex-col gap-2">
+					<label className="text-sm font-medium text-gray-600">Name</label>
 					<input
 						name="name"
 						type="text"
 						value={name}
-						className="w-full border-b border-black bg-beige p-2 focus:outline-none"
 						onChange={(e) => setName(e.target.value)}
+						className="rounded-lg border border-gray-300 px-4 py-2 focus:border-green-500 focus:outline-none"
 					/>
+				</div>
 
+				<div className="flex flex-col gap-2">
+					<label className="text-sm font-medium text-gray-600">Email</label>
 					<input
 						name="email"
 						type="email"
 						value={email}
-						className="w-full border-b border-black bg-beige p-2 focus:outline-none"
 						onChange={(e) => setEmail(e.target.value)}
+						className="rounded-lg border border-gray-300 px-4 py-2 focus:border-green-500 focus:outline-none"
 					/>
+				</div>
+
+				<div className="flex justify-end">
 					<button
 						type="submit"
 						disabled={loading}
-						className="w-full rounded-md bg-orange py-2 font-medium text-white transition hover:opacity-90"
+						className="mt-4 w-40 rounded-3xl bg-orange py-3 font-semibold text-white transition hover:bg-opacity-90"
 					>
 						{loading ? 'Saving...' : 'Save changes'}
 					</button>
 				</div>
-			</form>
-		</div>
+			</div>
+		</form>
 	);
 }
