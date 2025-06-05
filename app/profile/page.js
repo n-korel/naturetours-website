@@ -10,7 +10,7 @@ export default async function Page() {
 	const user = await getCurrentUser();
 
 	return (
-		<div className="rounded-2xl border border-slate-400 shadow">
+		<div className="flex flex-col gap-7">
 			<UserProfileForm user={user} />
 			<PasswordProfileForm />
 		</div>

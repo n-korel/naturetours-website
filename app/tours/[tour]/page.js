@@ -52,7 +52,13 @@ export default async function Page({ params }) {
 
 			<section className="mx-auto grid max-w-7xl gap-10 px-6 py-16 md:grid-cols-2">
 				<ImageGallery tour={tour} />
-				<FactsTour tour={tour} />
+
+				<div className="flex flex-col rounded-2xl bg-[#e5dbc4] p-8 shadow">
+					<FactsTour tour={tour} />
+					<button className="w-50 rounded-full bg-[#10291E] px-6 py-2 uppercase text-white transition hover:bg-opacity-90">
+						Book tour now!
+					</button>
+				</div>
 			</section>
 			<section className="mx-auto max-w-7xl px-6">
 				<h2 className="mb-4 text-2xl font-bold uppercase text-orange">{`About ${tour.name}`}</h2>

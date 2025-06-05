@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 function FactsTour({ tour }) {
 	return (
-		<div className="flex flex-col items-center justify-center">
+		<div className="flex h-full flex-row items-start justify-center gap-24">
 			<div className="mb-8">
 				<h2 className="mb-4 text-lg font-bold uppercase text-orange">Quick facts</h2>
 

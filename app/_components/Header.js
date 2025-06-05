@@ -15,6 +15,22 @@ export default async function Header() {
 					<Navigation />
 				</div>
 
+				{user && user.role === 'admin' && (
+					<span className="mr-3 rounded-full bg-red-500 px-3 py-1 text-base font-medium">
+						{user.role}
+					</span>
+				)}
+				{user && user.role === 'lead-guide' && (
+					<span className="mr-3 rounded-full bg-yellow-400 px-3 py-1 text-base font-medium">
+						{user.role}
+					</span>
+				)}
+				{user && user.role === 'guide' && (
+					<span className="mr-3 rounded-full bg-green-400 px-3 py-1 text-base font-medium">
+						{user.role}
+					</span>
+				)}
+
 				<div className="flex items-center gap-2 sm:gap-4">
 					<AuthButtons user={user} />
 				</div>

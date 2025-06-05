@@ -8,7 +8,7 @@ export default function ImageGallery({ tour }) {
 
 	return (
 		<div>
-			<div className="relative h-[300px] w-full overflow-hidden rounded-lg shadow-md">
+			<div className="relative h-[300px] w-full overflow-hidden rounded-2xl shadow-md">
 				<Image
 					src={`/img/tours/${selectedImage}`}
 					alt={tour.name}

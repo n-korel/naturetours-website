@@ -79,7 +79,7 @@ export async function logoutUser() {
 }
 
 export async function signInAction() {
-	await signIn('google', { redirectTo: '/profile' });
+	await signIn('google', { redirectTo: '/' });
 }
 
 export async function signOutAction() {
@@ -138,10 +138,40 @@ export async function updateUser(formData) {
 			return { success: false, message: 'Invalid name, email or photo' };
 		}
 
-		revalidatePath('/');
-		revalidatePath('/profile');
+		await Promise.all([revalidatePath('/'), revalidatePath('/profile')]);
 
 		return { success: true, message: 'Change successful!' };
+	} catch (error) {
+		console.error(error);
+		return { success: false, message: 'Something went wrong' };
+	}
+}
+
+export async function updatePassword(formData) {
+	try {
+		const passwordCurrent = formData.get('passwordCurrent');
+		const password = formData.get('password');
+		const passwordConfirm = formData.get('passwordConfirm');
+
+		const cookieStore = cookies();
+		const token = cookieStore.get('token');
+
+		if (!token?.value) {
+			return { success: false, message: 'Not authenticated' };
+		}
+
+		const res = await fetch(`${API_URL}api/v1/users/updateMyPassword`, {
+			method: 'PATCH',
+			headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token.value}` },
+			body: JSON.stringify({ passwordCurrent, password, passwordConfirm }),
+		});
+
+		if (!res.ok) {
+			const data = await res.json();
+			return { success: false, message: data.message || 'Invalid password' };
+		}
+
+		return { success: true, message: 'Change password successful!' };
 	} catch (error) {
 		console.error(error);
 		return { success: false, message: 'Something went wrong' };

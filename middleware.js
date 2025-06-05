@@ -12,7 +12,6 @@ export async function middleware(request) {
 
 	if (!token) {
 		const loginUrl = new URL('/login', request.url);
-		loginUrl.searchParams.set('callbackUrl', request.nextUrl.pathname);
 		return NextResponse.redirect(loginUrl);
 	}
 
@@ -20,5 +19,5 @@ export async function middleware(request) {
 }
 
 export const config = {
-	matcher: ['/profile'],
+	matcher: ['/profile', '/tours/:slug/booking'],
 };
