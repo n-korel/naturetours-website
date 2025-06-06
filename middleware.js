@@ -1,23 +1,27 @@
 import { NextResponse } from 'next/server';
-import { auth } from './app/_lib/auth';
 
 export async function middleware(request) {
-	const session = await auth();
+	const token = request.cookies.get('token')?.value;
+	const role = request.cookies.get('role')?.value;
 
-	if (session?.user) {
-		return NextResponse.next();
+	if (!token && !role) {
+		return NextResponse.redirect(new URL('/login', request.url));
 	}
 
-	const token = request.cookies.get('token')?.value;
+	if (request.nextUrl.pathname.startsWith('/booking') && role !== 'user') {
+		return NextResponse.redirect(new URL('/', request.url));
+	}
 
-	if (!token) {
-		const loginUrl = new URL('/login', request.url);
-		return NextResponse.redirect(loginUrl);
+	if (
+		request.nextUrl.pathname.startsWith('/management') &&
+		!(role === 'admin' || role === 'lead-guide')
+	) {
+		return NextResponse.redirect(new URL('/', request.url));
 	}
 
 	return NextResponse.next();
 }
 
 export const config = {
-	matcher: ['/profile', '/tours/:slug/booking'],
+	matcher: ['/profile', '/tours/:slug/booking', '/booking', '/management'],
 };

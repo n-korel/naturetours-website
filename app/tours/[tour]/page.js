@@ -6,6 +6,7 @@ import FactsTour from '@/app/_components/FactsTour';
 import dynamic from 'next/dynamic';
 import ReviewsCarousel from '@/app/_components/ReviewsCarousel';
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 
 const Map = dynamic(() => import('@/app/_components/Map'), {
 	ssr: false, // Leaflet требует отключить SSR
@@ -55,9 +56,15 @@ export default async function Page({ params }) {
 
 				<div className="flex flex-col rounded-2xl bg-[#e5dbc4] p-8 shadow">
 					<FactsTour tour={tour} />
-					<button className="w-50 rounded-full bg-[#10291E] px-6 py-2 uppercase text-white transition hover:bg-opacity-90">
-						Book tour now!
-					</button>
+
+					<div className="flex justify-center">
+						<Link
+							href={`/tours/${tour.slug}/booking`}
+							className="flex w-72 items-center justify-center rounded-3xl bg-forest px-6 py-3 uppercase text-white transition hover:bg-opacity-90"
+						>
+							Book tour now!
+						</Link>
+					</div>
 				</div>
 			</section>
 			<section className="mx-auto max-w-7xl px-6">

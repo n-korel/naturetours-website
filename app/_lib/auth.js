@@ -9,7 +9,7 @@ const authConfig = {
 		}),
 	],
 	callbacks: {
-		authorized({ auth, request }) {
+		authorized({ auth }) {
 			return !!auth?.user;
 		},
 	},

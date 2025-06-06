@@ -1,4 +1,4 @@
-import { Calendar, Star, TrendingUp, User } from 'lucide-react';
+import { Calendar, Clock, DollarSign, DollarSignIcon, Star, TrendingUp, User } from 'lucide-react';
 import { format } from 'date-fns';
 import Image from 'next/image';
 
@@ -15,6 +15,11 @@ function FactsTour({ tour }) {
 						<span>{format(new Date(tour.startDates[0]), 'MMMM yyyy')}</span>
 					</li>
 					<li className="flex items-center gap-3">
+						<Clock className="h-5 w-5 text-textdark" />
+						<span className="font-medium">Duration:</span>
+						<span>{`${tour.duration} days`}</span>
+					</li>
+					<li className="flex items-center gap-3">
 						<TrendingUp className="h-5 w-5 text-textdark" />
 						<span className="font-medium">Difficulty:</span>
 						<span>{tour.difficulty}</span>
@@ -28,6 +33,11 @@ function FactsTour({ tour }) {
 						<Star className="h-5 w-5 text-textdark" />
 						<span className="font-medium">Rating:</span>
 						<span>{tour.ratingsAverage} / 5</span>
+					</li>
+					<li className="flex items-center gap-3">
+						<DollarSignIcon className="h-5 w-5 text-textdark" />
+						<span className="font-medium">Price:</span>
+						<span>{tour.price} $</span>
 					</li>
 				</ul>
 			</div>

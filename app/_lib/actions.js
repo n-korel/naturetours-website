@@ -31,6 +31,13 @@ export async function loginUser(formData) {
 			maxAge: 60 * 60 * 24 * 7, // 1 week
 		});
 
+		cookieStore.set('role', data.data.user.role, {
+			httpOnly: false,
+			secure: process.env.NODE_ENV === 'production',
+			path: '/',
+			maxAge: 60 * 60 * 24 * 7,
+		});
+
 		return { success: true, message: 'Login successful!' };
 	} catch (error) {
 		console.error(error);
@@ -65,6 +72,13 @@ export async function signupUser(formData) {
 			maxAge: 60 * 60 * 24 * 7, // 1 week
 		});
 
+		cookieStore.set('role', data.data.user.role, {
+			httpOnly: false,
+			secure: process.env.NODE_ENV === 'production',
+			path: '/',
+			maxAge: 60 * 60 * 24 * 7,
+		});
+
 		return { success: true, message: 'Sign up successful!' };
 	} catch (error) {
 		console.error(error);
@@ -75,10 +89,18 @@ export async function signupUser(formData) {
 export async function logoutUser() {
 	const cookieStore = cookies();
 	cookieStore.delete('token');
+	cookieStore.delete('role');
 	await signOut({ redirectTo: '/' });
 }
 
 export async function signInAction() {
+	const cookieStore = cookies();
+
+	cookieStore.set('role', 'user', {
+		httpOnly: false,
+		secure: process.env.NODE_ENV === 'production',
+		path: '/',
+	});
 	await signIn('google', { redirectTo: '/' });
 }
 

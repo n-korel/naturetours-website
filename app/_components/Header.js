@@ -2,6 +2,7 @@ import { getCurrentUser } from '../_lib/data-service';
 import AuthButtons from './AuthButtons';
 import Logo from './Logo';
 import Navigation from './Navigation';
+import Link from 'next/link';
 
 export default async function Header() {
 	const user = await getCurrentUser();
@@ -12,18 +13,24 @@ export default async function Header() {
 				<Logo />
 
 				<div className="hidden flex-1 justify-center sm:flex">
-					<Navigation />
+					<Navigation user={user} />
 				</div>
 
 				{user && user.role === 'admin' && (
-					<span className="mr-3 rounded-full bg-red-500 px-3 py-1 text-base font-medium">
+					<Link
+						href="/management"
+						className="mr-3 rounded-full bg-red-500 px-3 py-1 text-base font-medium transition hover:bg-opacity-80"
+					>
 						{user.role}
-					</span>
+					</Link>
 				)}
 				{user && user.role === 'lead-guide' && (
-					<span className="mr-3 rounded-full bg-yellow-400 px-3 py-1 text-base font-medium">
+					<Link
+						href="/management"
+						className="mr-3 rounded-full bg-yellow-400 px-3 py-1 text-base font-medium transition hover:bg-opacity-80"
+					>
 						{user.role}
-					</span>
+					</Link>
 				)}
 				{user && user.role === 'guide' && (
 					<span className="mr-3 rounded-full bg-green-400 px-3 py-1 text-base font-medium">
