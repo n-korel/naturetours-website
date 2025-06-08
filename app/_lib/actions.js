@@ -105,6 +105,8 @@ export async function signInAction() {
 }
 
 export async function signOutAction() {
+	const cookieStore = cookies();
+	cookieStore.delete('role');
 	await signOut({ redirectTo: '/' });
 }
 

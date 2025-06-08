@@ -6,7 +6,7 @@ export const metadata = {
 
 export default function Page() {
 	return (
-		<div className="flex h-full items-center justify-center">
+		<div className="flex h-full items-center justify-center pt-[80px]">
 			<SignupForm />
 		</div>
 	);

@@ -10,7 +10,7 @@ export default async function Page() {
 	const user = await getCurrentUser();
 
 	return (
-		<div className="flex flex-col gap-7">
+		<div className="mx-auto flex h-full max-w-5xl flex-col gap-7 pt-[80px]">
 			<UserProfileForm user={user} />
 			<PasswordProfileForm />
 		</div>

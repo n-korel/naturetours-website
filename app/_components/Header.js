@@ -1,8 +1,8 @@
-import { getCurrentUser } from '../_lib/data-service';
-import AuthButtons from './AuthButtons';
+import Link from 'next/link';
 import Logo from './Logo';
 import Navigation from './Navigation';
-import Link from 'next/link';
+import AuthButtons from './AuthButtons';
+import { getCurrentUser } from '../_lib/data-service';
 
 export default async function Header() {
 	const user = await getCurrentUser();

@@ -16,7 +16,7 @@ export default function Navigation({ user }) {
 			</Link>
 
 			<Link
-				href="'/tours'"
+				href="/tours"
 				className={`${pathname === '/tours' ? 'font-semibold text-orange' : 'text-textdark'} transition hover:text-orange`}
 			>
 				<span>All Tours</span>
@@ -36,6 +36,13 @@ export default function Navigation({ user }) {
 				className={`${pathname === '/guides' ? 'font-semibold text-orange' : 'text-textdark'} transition hover:text-orange`}
 			>
 				<span>Our Guides</span>
+			</Link>
+
+			<Link
+				href="/reviews"
+				className={`${pathname === '/reviews' ? 'font-semibold text-orange' : 'text-textdark'} transition hover:text-orange`}
+			>
+				<span>Reviews</span>
 			</Link>
 
 			<Link

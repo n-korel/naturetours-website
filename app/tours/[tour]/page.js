@@ -1,4 +1,4 @@
-import { getTour, getTourId, getTours, getToursSSG } from '@/app/_lib/data-service';
+import { getCurrentUser, getTour, getTourId, getTours, getToursSSG } from '@/app/_lib/data-service';
 
 import ImageGallery from '@/app/_components/ImageGallery';
 import MainImage from '@/app/_components/MainImage';
@@ -38,6 +38,7 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }) {
 	const tourId = await getTourId(params.tour);
+	const user = await getCurrentUser();
 
 	if (!tourId) {
 		notFound();
@@ -58,12 +59,14 @@ export default async function Page({ params }) {
 					<FactsTour tour={tour} />
 
 					<div className="flex justify-center">
-						<Link
-							href={`/tours/${tour.slug}/booking`}
-							className="flex w-72 items-center justify-center rounded-3xl bg-forest px-6 py-3 uppercase text-white transition hover:bg-opacity-90"
-						>
-							Book tour now!
-						</Link>
+						{user && user.role === 'user' && (
+							<Link
+								href={`/tours/${tour.slug}/booking`}
+								className="flex w-72 items-center justify-center rounded-3xl bg-forest px-6 py-3 uppercase text-white transition hover:bg-opacity-90"
+							>
+								Book tour now!
+							</Link>
+						)}
 					</div>
 				</div>
 			</section>
