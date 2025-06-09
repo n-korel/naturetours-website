@@ -104,12 +104,6 @@ export async function signInAction() {
 	await signIn('google', { redirectTo: '/' });
 }
 
-export async function signOutAction() {
-	const cookieStore = cookies();
-	cookieStore.delete('role');
-	await signOut({ redirectTo: '/' });
-}
-
 export async function forgotPassword(formData) {
 	try {
 		const email = formData.get('email');
@@ -196,6 +190,35 @@ export async function updatePassword(formData) {
 		}
 
 		return { success: true, message: 'Change password successful!' };
+	} catch (error) {
+		console.error(error);
+		return { success: false, message: 'Something went wrong' };
+	}
+}
+
+export async function deleteUser() {
+	try {
+		const cookieStore = cookies();
+		const token = cookieStore.get('token');
+
+		if (!token?.value) {
+			return { success: false, message: 'Not authenticated' };
+		}
+
+		const res = await fetch(`${API_URL}api/v1/users/deleteMe`, {
+			method: 'DELETE',
+			headers: { Authorization: `Bearer ${token.value}` },
+		});
+
+		if (!res.ok) {
+			return { success: false, message: 'Delete error' };
+		}
+
+		cookieStore.delete('token');
+		cookieStore.delete('role');
+		revalidatePath('/');
+
+		return { success: true, message: 'Delete successful!' };
 	} catch (error) {
 		console.error(error);
 		return { success: false, message: 'Something went wrong' };

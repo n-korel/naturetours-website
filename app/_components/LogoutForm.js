@@ -1,21 +1,13 @@
-import { logoutUser, signOutAction } from '../_lib/actions';
+import { logoutUser } from '../_lib/actions';
 
-function LogoutForm({ user }) {
+function LogoutForm() {
 	return (
 		<div>
-			{user.from === 'nextauth' ? (
-				<form action={signOutAction}>
-					<button className="rounded-full bg-orange px-4 py-2 text-sm text-white transition hover:opacity-80 sm:text-lg">
-						Logout
-					</button>
-				</form>
-			) : (
-				<form action={logoutUser}>
-					<button className="rounded-full bg-orange px-4 py-2 text-sm text-white transition hover:opacity-80 sm:text-lg">
-						Logout
-					</button>
-				</form>
-			)}
+			<form action={logoutUser}>
+				<button className="rounded-full bg-orange px-4 py-2 text-sm text-white transition hover:opacity-80 sm:text-lg">
+					Logout
+				</button>
+			</form>
 		</div>
 	);
 }

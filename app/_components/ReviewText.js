@@ -8,8 +8,8 @@ export default function ReviewText({ text }) {
 		setIsExpanded((prev) => !prev);
 	};
 
-	const isLong = text.length > 100;
-	const displayText = isExpanded || !isLong ? text : `${text.slice(0, 100)}...`;
+	const isLong = text.length > 70;
+	const displayText = isExpanded || !isLong ? text : `${text.slice(0, 70)}...`;
 
 	return (
 		<div>

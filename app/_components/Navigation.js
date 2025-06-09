@@ -22,20 +22,11 @@ export default function Navigation({ user }) {
 				<span>All Tours</span>
 			</Link>
 
-			{user && user.role === 'user' && (
-				<Link
-					href="/booking"
-					className={`${pathname === '/booking' ? 'font-semibold text-orange' : 'text-textdark'} transition hover:text-orange`}
-				>
-					<span>Booking</span>
-				</Link>
-			)}
-
 			<Link
-				href="/guides"
-				className={`${pathname === '/guides' ? 'font-semibold text-orange' : 'text-textdark'} transition hover:text-orange`}
+				href="/booking"
+				className={`${pathname === '/booking' ? 'font-semibold text-orange' : 'text-textdark'} transition hover:text-orange`}
 			>
-				<span>Our Guides</span>
+				<span>Booking</span>
 			</Link>
 
 			<Link

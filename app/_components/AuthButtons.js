@@ -27,7 +27,7 @@ function AuthButtons({ user }) {
 						</div>
 					</Link>
 
-					<LogoutForm user={user} />
+					<LogoutForm />
 				</div>
 			) : (
 				<div>

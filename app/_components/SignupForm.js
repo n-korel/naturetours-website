@@ -1,13 +1,14 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import { signupUser } from '../_lib/actions';
 import { signInAction } from '../_lib/actions';
 
 export default function SignupForm() {
 	const [loading, setLoading] = useState(false);
+	const formRef = useRef();
 
 	async function handleSubmit(e) {
 		e.preventDefault();
@@ -25,6 +26,7 @@ export default function SignupForm() {
 			}, 1000);
 		} else {
 			toast.error(result.message);
+			formRef.current?.reset();
 		}
 	}
 
@@ -33,7 +35,7 @@ export default function SignupForm() {
 			<div className="w-full max-w-sm rounded-lg p-8">
 				<h2 className="mb-6 text-center text-2xl font-bold text-textdark">Create an account</h2>
 
-				<form onSubmit={handleSubmit} className="space-y-4">
+				<form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
 					<input
 						type="text"
 						name="name"

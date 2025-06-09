@@ -101,7 +101,6 @@ export const getTour = async function (id) {
 
 		const json = await res.json();
 		const tour = json.data?.data;
-
 		return tour;
 	} catch (error) {
 		console.error(error);
@@ -202,4 +201,32 @@ export const getCurrentUser = async function () {
 	}
 
 	return user;
+};
+
+export const getAllReviews = async function (page, limit) {
+	try {
+		const cookieStore = cookies();
+		const token = cookieStore.get('token');
+
+		if (!token) {
+			return null;
+		}
+
+		const res = await fetch(`${API_URL}api/v1/reviews?page=${page}&limit=${limit}`, {
+			headers: {
+				Authorization: `Bearer ${token.value}`,
+			},
+		});
+
+		if (!res.ok) {
+			return null;
+		}
+
+		const json = await res.json();
+		const reviews = json.data?.data;
+		return reviews;
+	} catch (error) {
+		console.error(error);
+		return null;
+	}
 };

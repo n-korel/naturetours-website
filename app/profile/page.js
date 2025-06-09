@@ -1,3 +1,4 @@
+import DeleteUserButton from '../_components/DeleteUserButton';
 import PasswordProfileForm from '../_components/PasswordProfileForm';
 import UserProfileForm from '../_components/UserProfileForm';
 import { getCurrentUser } from '../_lib/data-service';
@@ -10,9 +11,12 @@ export default async function Page() {
 	const user = await getCurrentUser();
 
 	return (
-		<div className="mx-auto flex h-full max-w-5xl flex-col gap-7 pt-[80px]">
+		<div className="mx-auto flex h-full max-w-5xl flex-col justify-center gap-7 pt-[80px]">
 			<UserProfileForm user={user} />
 			<PasswordProfileForm />
+			<div className="flex w-full items-center justify-center">
+				<DeleteUserButton />
+			</div>
 		</div>
 	);
 }
