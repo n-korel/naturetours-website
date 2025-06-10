@@ -1,25 +1,22 @@
 'use client';
 
 import Link from 'next/link';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { loginUser } from '../_lib/actions';
 import { signInAction } from '../_lib/actions';
+import SubmitButton from './SubmitButton';
 
 export default function LoginForm() {
-	const [loading, setLoading] = useState(false);
 	const router = useRouter();
 	const formRef = useRef();
 
 	async function handleSubmit(e) {
 		e.preventDefault();
-		setLoading(true);
 
 		const formData = new FormData(e.target);
 		const result = await loginUser(formData);
-
-		setLoading(false);
 
 		if (result.success) {
 			toast.success(result.message);
@@ -60,13 +57,12 @@ export default function LoginForm() {
 						Forgot your password?
 					</Link>
 
-					<button
-						type="submit"
-						disabled={loading}
+					<SubmitButton
+						pendingLabel="Logging in..."
 						className="w-full rounded-md bg-orange py-2 font-medium text-white transition hover:opacity-90"
 					>
-						{loading ? 'Logging in...' : 'Login'}
-					</button>
+						Login
+					</SubmitButton>
 				</form>
 
 				<form action={signInAction} className="mt-4">

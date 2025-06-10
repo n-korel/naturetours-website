@@ -1,22 +1,18 @@
 'use client';
 
-import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { forgotPassword } from '../_lib/actions';
+import SubmitButton from './SubmitButton';
 
 export default function ForgotPasswordForm() {
-	const [loading, setLoading] = useState(false);
 	const router = useRouter();
 
 	async function handleSubmit(e) {
 		e.preventDefault();
-		setLoading(true);
 
 		const formData = new FormData(e.target);
 		const result = await forgotPassword(formData);
-
-		setLoading(false);
 
 		if (result.success) {
 			toast.success(result.message);
@@ -42,13 +38,12 @@ export default function ForgotPasswordForm() {
 						className="w-full border-b border-black bg-beige p-2 focus:outline-none"
 					/>
 
-					<button
-						type="submit"
-						disabled={loading}
+					<SubmitButton
+						pendingLabel="Reseting..."
 						className="w-full rounded-md bg-orange py-2 font-medium text-white transition hover:opacity-90"
 					>
-						{loading ? 'Reseting...' : 'Reset Password'}
-					</button>
+						Reset Password
+					</SubmitButton>
 				</form>
 			</div>
 		</div>

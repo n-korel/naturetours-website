@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import { updateUser } from '../_lib/actions';
+import SubmitButton from './SubmitButton';
 
 export default function UserProfileForm({ user }) {
 	const [name, setName] = useState(user.name);
@@ -10,7 +11,6 @@ export default function UserProfileForm({ user }) {
 	const [photoPreview, setPhotoPreview] = useState(user.photo);
 	const [photoFile, setPhotoFile] = useState(null);
 	const fileInputRef = useRef(null);
-	const [loading, setLoading] = useState(false);
 
 	const handlePhotoChange = (e) => {
 		const file = e.target.files[0];
@@ -22,7 +22,6 @@ export default function UserProfileForm({ user }) {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		setLoading(true);
 
 		const formData = new FormData();
 		formData.append('name', name);
@@ -32,7 +31,6 @@ export default function UserProfileForm({ user }) {
 		}
 
 		const result = await updateUser(formData);
-		setLoading(false);
 
 		if (result.success) {
 			toast.success(result.message);
@@ -42,18 +40,20 @@ export default function UserProfileForm({ user }) {
 	};
 
 	return (
-		<div className="flex flex-col rounded-2xl border border-slate-400 p-8 shadow">
-			<h2 className="text-center text-3xl font-bold text-gray-800 md:text-left">Your Account</h2>
+		<div className="rounded-2xl border border-slate-300 p-8 shadow-lg">
+			<h2 className="mb-6 text-center text-3xl font-bold text-gray-800 md:text-left">
+				Your Account
+			</h2>
 
-			<form onSubmit={handleSubmit} className="flex max-w-4xl flex-row items-center md:flex-row">
-				<div className="flex w-full max-w-40 flex-col items-center gap-4">
+			<form onSubmit={handleSubmit} className="flex flex-col gap-10 md:flex-row md:items-start">
+				{/* Avatar Section */}
+				<div className="flex flex-col items-center gap-4">
 					<img
 						src={photoPreview}
 						alt="User avatar"
-						className="h-55 w-55 rounded-full object-cover shadow"
+						className="h-36 w-36 rounded-full object-cover shadow-md"
 						referrerPolicy="no-referrer"
 					/>
-
 					<input
 						name="photo"
 						type="file"
@@ -71,7 +71,8 @@ export default function UserProfileForm({ user }) {
 					</button>
 				</div>
 
-				<div className="flex w-full flex-col gap-6 pl-10 pt-10">
+				{/* Inputs Section */}
+				<div className="flex w-full flex-col gap-6">
 					<div className="flex flex-col gap-2">
 						<label className="text-sm font-medium text-gray-600">Name</label>
 						<input
@@ -95,13 +96,12 @@ export default function UserProfileForm({ user }) {
 					</div>
 
 					<div className="flex justify-end">
-						<button
-							type="submit"
-							disabled={loading}
-							className="mt-4 w-40 rounded-3xl bg-orange py-3 font-semibold text-white transition hover:bg-opacity-80 disabled:bg-opacity-80"
+						<SubmitButton
+							pendingLabel="Saving..."
+							className="w-40 rounded-3xl bg-orange py-3 font-semibold text-white transition hover:bg-opacity-80 disabled:bg-opacity-80"
 						>
-							{loading ? 'Saving...' : 'Save changes'}
-						</button>
+							Save changes
+						</SubmitButton>
 					</div>
 				</div>
 			</form>

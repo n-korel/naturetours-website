@@ -1,23 +1,20 @@
 'use client';
 
-import Link from 'next/link';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import toast from 'react-hot-toast';
+import Link from 'next/link';
 import { signupUser } from '../_lib/actions';
 import { signInAction } from '../_lib/actions';
+import SubmitButton from './SubmitButton';
 
 export default function SignupForm() {
-	const [loading, setLoading] = useState(false);
 	const formRef = useRef();
 
 	async function handleSubmit(e) {
 		e.preventDefault();
-		setLoading(true);
 
 		const formData = new FormData(e.target);
 		const result = await signupUser(formData);
-
-		setLoading(false);
 
 		if (result.success) {
 			toast.success(result.message);
@@ -64,13 +61,13 @@ export default function SignupForm() {
 						required
 						className="w-full border-b border-black bg-beige p-2 focus:outline-none"
 					/>
-					<button
-						type="submit"
-						disabled={loading}
+
+					<SubmitButton
+						pendingLabel="Signing up..."
 						className="w-full rounded-md bg-orange py-2 font-medium text-white transition hover:opacity-90"
 					>
-						{loading ? 'Signing up...' : 'Sign up'}
-					</button>
+						Sign up
+					</SubmitButton>
 				</form>
 
 				<form action={signInAction} className="mt-4">

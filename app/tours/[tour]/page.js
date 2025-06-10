@@ -7,6 +7,7 @@ import dynamic from 'next/dynamic';
 import ReviewsCarousel from '@/app/_components/ReviewsCarousel';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import ReviewForm from '@/app/_components/ReviewForm';
 
 const Map = dynamic(() => import('@/app/_components/Map'), {
 	ssr: false, // Leaflet требует отключить SSR
@@ -80,7 +81,15 @@ export default async function Page({ params }) {
 			</section>
 			<section className="mx-auto max-w-7xl p-6">
 				<h1 className="mb-4 text-2xl font-bold uppercase text-orange">Reviews</h1>
-				<ReviewsCarousel reviews={tour.reviews} />
+				{tour.reviews.length ? (
+					<ReviewsCarousel reviews={tour.reviews} />
+				) : (
+					<span className="text-base leading-relaxed">No Reviews!</span>
+				)}
+			</section>
+			<section className="mx-auto max-w-7xl p-6">
+				<h1 className="mb-4 text-2xl font-bold uppercase text-orange">Add Your Review</h1>
+				<ReviewForm />
 			</section>
 		</main>
 	);

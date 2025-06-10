@@ -30,7 +30,7 @@ function AuthButtons({ user }) {
 					<LogoutForm />
 				</div>
 			) : (
-				<div>
+				<div className="flex items-center gap-3">
 					<Link
 						href="/login"
 						className="rounded-full px-4 py-2 text-sm text-textdark transition hover:bg-lightgray sm:text-lg"
