@@ -4,8 +4,7 @@ import ReviewString from './ReviewString';
 
 export default async function ReviewList({ searchParams }) {
 	const page = Number(searchParams.page || 1);
-	// console.log(searchParams);
-	// const page = 1;
+
 	const limit = 10;
 
 	const reviews = await getAllReviews(page, limit);

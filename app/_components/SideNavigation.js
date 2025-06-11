@@ -6,18 +6,18 @@ import { usePathname } from 'next/navigation';
 
 const navLinks = [
 	{
-		name: 'Profile',
-		href: '/profile',
-		icon: <User2Icon className="text-primary-600 h-5 w-5" />,
-	},
-	{
-		name: 'My bookings',
-		href: '/profile/mybookings',
+		name: 'Tours',
+		href: '/management',
 		icon: <Calendar className="text-primary-600 h-5 w-5" />,
 	},
 	{
-		name: 'My reviews',
-		href: '/profile/myreviews',
+		name: 'Users',
+		href: '/management/users',
+		icon: <User2Icon className="text-primary-600 h-5 w-5" />,
+	},
+	{
+		name: 'Reviews',
+		href: '/management/reviews',
 		icon: <Star className="text-primary-600 h-5 w-5" />,
 	},
 ];
@@ -26,8 +26,8 @@ function SideNavigation() {
 	const pathname = usePathname();
 
 	return (
-		<nav className="">
-			<ul className="flex flex-col gap-2">
+		<nav>
+			<ul className="flex gap-2">
 				{navLinks.map((link) => (
 					<li key={link.name}>
 						<Link
@@ -37,6 +37,7 @@ function SideNavigation() {
 							href={link.href}
 						>
 							{link.icon}
+							{link.name}
 						</Link>
 					</li>
 				))}

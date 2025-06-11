@@ -2,8 +2,6 @@ import { NextResponse } from 'next/server';
 import { auth } from './app/_lib/auth';
 
 export async function middleware(request) {
-	const session = await auth();
-
 	const token = request.cookies.get('token')?.value;
 	const role = request.cookies.get('role')?.value;
 

@@ -87,10 +87,12 @@ export default async function Page({ params }) {
 					<span className="text-base leading-relaxed">No Reviews!</span>
 				)}
 			</section>
-			<section className="mx-auto max-w-7xl p-6">
-				<h1 className="mb-4 text-2xl font-bold uppercase text-orange">Add Your Review</h1>
-				<ReviewForm />
-			</section>
+			{user && user.role === 'user' && (
+				<section className="mx-auto max-w-7xl p-6">
+					<h1 className="mb-4 text-2xl font-bold uppercase text-orange">Add Your Review</h1>
+					<ReviewForm tourId={tourId.id} />
+				</section>
+			)}
 		</main>
 	);
 }

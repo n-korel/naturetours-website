@@ -1,7 +1,5 @@
 import Image from 'next/image';
 import reviews from '@/public/reviews.jpg';
-import Filters from '../_components/Filters';
-import Sorting from '../_components/Sorting';
 import ReviewList from '../_components/ReviewList';
 import { Suspense } from 'react';
 import Spinner from '../_components/Spinner';

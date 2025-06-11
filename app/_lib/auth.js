@@ -12,9 +12,9 @@ const authConfig = {
 		authorized({ auth }) {
 			return !!auth?.user;
 		},
-
 		async jwt({ token, user, account }) {
 			if (account && user) {
+				token.id = user.id;
 				token.role = 'user';
 				token.accessToken = account.access_token;
 			}
@@ -22,10 +22,16 @@ const authConfig = {
 		},
 
 		async session({ session, token }) {
-			session.user.role = token.role;
-			session.user.accessToken = token.accessToken;
+			if (session?.user) {
+				session.user.id = token.id;
+				session.user.role = token.role;
+				session.user.accessToken = token.accessToken;
+			}
 			return session;
 		},
+	},
+	session: {
+		strategy: 'jwt',
 	},
 };
 

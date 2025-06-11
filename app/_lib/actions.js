@@ -79,6 +79,8 @@ export async function signupUser(formData) {
 			maxAge: 60 * 60 * 24 * 7,
 		});
 
+		revalidatePath('/');
+
 		return { success: true, message: 'Sign up successful!' };
 	} catch (error) {
 		console.error(error);
@@ -142,9 +144,7 @@ export async function updateUser(formData) {
 		const body = new FormData();
 		body.append('name', name);
 		body.append('email', email);
-		if (photo && typeof photo === 'object' && 'arrayBuffer' in photo) {
-			body.append('photo', photo);
-		}
+		body.append('photo', photo);
 
 		const res = await fetch(`${API_URL}api/v1/users/updateMe`, {
 			method: 'PATCH',
@@ -216,9 +216,42 @@ export async function deleteUser() {
 
 		cookieStore.delete('token');
 		cookieStore.delete('role');
-		revalidatePath('/');
 
 		return { success: true, message: 'Delete successful!' };
+	} catch (error) {
+		console.error(error);
+		return { success: false, message: 'Something went wrong' };
+	}
+}
+
+export async function addReview(formData, tourId) {
+	try {
+		const review = formData.get('review');
+		const rating = Number(formData.get('rating'));
+
+		const cookieStore = cookies();
+		const token = cookieStore.get('token');
+
+		if (!token?.value) {
+			return { success: false, message: 'Not authenticated' };
+		}
+
+		/* 		const body = new FormData();
+		body.append('review', review);
+		body.append('rating', rating); */
+
+		const res = await fetch(`${API_URL}api/v1/tours/${tourId}/reviews`, {
+			method: 'POST',
+			headers: { Authorization: `Bearer ${token.value}`, 'Content-Type': 'application/json' },
+			body: JSON.stringify({ review, rating }),
+		});
+
+		console.log(JSON.stringify({ review, rating }));
+		if (!res.ok) {
+			return { success: false, message: 'Invalid review' };
+		}
+
+		return { success: true, message: 'Add review successful!' };
 	} catch (error) {
 		console.error(error);
 		return { success: false, message: 'Something went wrong' };
