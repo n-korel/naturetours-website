@@ -18,9 +18,7 @@ export default function SignupForm() {
 
 		if (result.success) {
 			toast.success(result.message);
-			setTimeout(() => {
-				router.push('/');
-			}, 1000);
+			router.push('/');
 		} else {
 			toast.error(result.message);
 			formRef.current?.reset();

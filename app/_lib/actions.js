@@ -236,10 +236,6 @@ export async function addReview(formData, tourId) {
 			return { success: false, message: 'Not authenticated' };
 		}
 
-		/* 		const body = new FormData();
-		body.append('review', review);
-		body.append('rating', rating); */
-
 		const res = await fetch(`${API_URL}api/v1/tours/${tourId}/reviews`, {
 			method: 'POST',
 			headers: { Authorization: `Bearer ${token.value}`, 'Content-Type': 'application/json' },
@@ -252,6 +248,50 @@ export async function addReview(formData, tourId) {
 		}
 
 		return { success: true, message: 'Add review successful!' };
+	} catch (error) {
+		console.error(error);
+		return { success: false, message: 'Something went wrong' };
+	}
+}
+
+export async function createNewTour(formData) {
+	try {
+		const name = formData.get('name');
+		const duration = formData.get('duration');
+		const maxGroupSize = formData.get('maxGroupSize');
+		const difficulty = formData.get('difficulty');
+		const price = formData.get('price');
+		const summary = formData.get('summary');
+		const imageCover = formData.get('imageCover');
+
+		const cookieStore = cookies();
+		const token = cookieStore.get('token');
+
+		if (!token?.value) {
+			return { success: false, message: 'Not authenticated' };
+		}
+
+		const res = await fetch(`${API_URL}api/v1/tours`, {
+			method: 'POST',
+			headers: { Authorization: `Bearer ${token.value}`, 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				name,
+				duration,
+				maxGroupSize,
+				difficulty,
+				price,
+				summary,
+				imageCover,
+			}),
+		});
+
+		if (!res.ok) {
+			return { success: false, message: 'Invalid data' };
+		}
+
+		revalidatePath('/management');
+
+		return { success: true, message: 'Sign up successful!' };
 	} catch (error) {
 		console.error(error);
 		return { success: false, message: 'Something went wrong' };
