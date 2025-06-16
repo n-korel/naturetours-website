@@ -13,10 +13,8 @@ export default function DeleteUserButton() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		setLoading(true);
 
 		const result = await deleteUser();
-		setLoading(false);
 
 		if (result.success) {
 			toast.success(result.message);

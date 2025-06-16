@@ -3,8 +3,10 @@ import TourDetailButton from './TourDetailButton';
 
 export default function TourAdminString({ tour, isOpen, onToggle }) {
 	return (
-		<div className="flex border border-t border-gray-200 text-sm font-normal text-textdark">
-			<div className="flex flex-1 items-center border p-2 font-medium">{tour.name ?? 'Tour'}</div>
+		<div className="flex border border-t border-gray-200 text-base font-normal text-textdark">
+			<div className="flex flex-1 items-center whitespace-nowrap border p-2 font-medium">
+				{tour.name ?? 'Tour'}
+			</div>
 			<div className="flex flex-1 items-center border p-2">
 				{format(new Date(tour.startDates[0]), 'MMMM yyyy')}
 			</div>
@@ -14,7 +16,12 @@ export default function TourAdminString({ tour, isOpen, onToggle }) {
 			<div className="flex flex-1 items-center border p-2">{tour.ratingsAverage} / 5</div>
 			<div className="flex flex-1 items-center justify-between border p-2">
 				<div>{tour.price} $</div>
-				<TourDetailButton isOpen={isOpen} onToggle={onToggle} />
+				<TourDetailButton
+					isOpen={isOpen}
+					onToggle={onToggle}
+					tourId={tour.id}
+					tourName={tour.name}
+				/>
 			</div>
 		</div>
 	);

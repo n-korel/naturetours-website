@@ -7,7 +7,7 @@ export default async function TourAdminTable({ searchParams }) {
 	const limit = 20;
 
 	const { tours } = await getTours({ ...searchParams, page, limit });
-	if (!tours) return null;
+	if (!tours) return {};
 	const allTours = await getTours({ searchParams });
 	const totalPages = Math.ceil(allTours.total / limit);
 
