@@ -1,9 +1,9 @@
 'use client';
 
 import ReactDOM from 'react-dom';
-import { useOutsideClick } from './hooks/useOutsideClock';
+import useClickOutside from './hooks/useClickOutside';
 export default function Modal({ onClose, children }) {
-	const ref = useOutsideClick(onClose);
+	const ref = useClickOutside(onClose);
 
 	return ReactDOM.createPortal(
 		<div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">

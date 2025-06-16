@@ -38,6 +38,13 @@ export const getTours = async function (searchParams) {
 		params.set('sort', searchParams.sort);
 	}
 
+	if (searchParams.page) {
+		params.set('page', searchParams.page);
+	}
+	if (searchParams.limit) {
+		params.set('limit', searchParams.limit);
+	}
+
 	mappings.forEach(({ key, paramName, map }) => {
 		const range = map[searchParams[key]];
 		if (range) {
@@ -55,14 +62,12 @@ export const getTours = async function (searchParams) {
 			next: { revalidate: 60 },
 		});
 
-		if (!res.ok) {
-			return null;
-		}
+		if (!res.ok) return null;
 
 		const json = await res.json();
 		const tours = json.data?.data;
-
-		return tours;
+		const total = json.results;
+		return { tours, total };
 	} catch (error) {
 		console.error(error);
 		return null;
@@ -208,9 +213,7 @@ export const getAllReviews = async function (page, limit) {
 		const cookieStore = cookies();
 		const token = cookieStore.get('token');
 
-		if (!token) {
-			return null;
-		}
+		if (!token) return { reviews: [], total: 0 };
 
 		const res = await fetch(`${API_URL}api/v1/reviews?page=${page}&limit=${limit}`, {
 			headers: {
@@ -218,13 +221,14 @@ export const getAllReviews = async function (page, limit) {
 			},
 		});
 
-		if (!res.ok) {
-			return null;
-		}
+		if (!res.ok) return { reviews: [], total: 0 };
 
 		const json = await res.json();
-		const reviews = json.data?.data;
-		return reviews;
+
+		const reviews = json.data?.data || [];
+		const total = json.results || 0;
+
+		return { reviews, total };
 	} catch (error) {
 		console.error(error);
 		return null;

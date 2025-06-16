@@ -17,6 +17,7 @@ export default function Filters() {
 	function handleFilter(param, value) {
 		const params = new URLSearchParams(searchParams);
 		params.set(param, value);
+		params.delete('page');
 		router.replace(`${pathname}?${params.toString()}`, { scroll: false });
 	}
 

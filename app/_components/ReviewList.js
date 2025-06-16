@@ -1,15 +1,14 @@
-import Link from 'next/link';
 import { getAllReviews } from '../_lib/data-service';
 import ReviewString from './ReviewString';
+import Pagination from './Pagination';
 
 export default async function ReviewList({ searchParams }) {
 	const page = Number(searchParams.page || 1);
-
 	const limit = 10;
 
-	const reviews = await getAllReviews(page, limit);
-	const total = await getAllReviews(0, 0);
-	const totalPages = Math.ceil(total.length / limit);
+	const { reviews } = await getAllReviews(page, limit);
+	const allReviews = await getAllReviews(0, 0);
+	const totalPages = Math.ceil(allReviews.total / limit);
 
 	return (
 		<div className="w-full">
@@ -22,24 +21,12 @@ export default async function ReviewList({ searchParams }) {
 					<div>Text</div>
 				</div>
 
-				{reviews.map((review) => (
+				{reviews?.map((review) => (
 					<ReviewString key={review.id} review={review} />
 				))}
 			</div>
 
-			<div className="mt-6 flex gap-2">
-				{Array.from({ length: totalPages }, (_, i) => (
-					<Link
-						key={i}
-						href={`/reviews?page=${i + 1}`}
-						className={`rounded border px-3 py-1 transition hover:bg-orange ${
-							page === i + 1 ? 'bg-orange text-white' : 'bg-white'
-						}`}
-					>
-						{i + 1}
-					</Link>
-				))}
-			</div>
+			<Pagination totalPages={totalPages} currentPage={page} basePath="/reviews" />
 		</div>
 	);
 }

@@ -1,8 +1,9 @@
 'use client';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
+import useClickOutside from './hooks/useClickOutside';
 
 const sortOptions = [
 	{ label: 'Alphabetical (A-Z)', value: 'name' },
@@ -22,24 +23,29 @@ export default function Sorting() {
 
 	const currentSort = searchParams.get('sort') || '';
 	const [open, setOpen] = useState(false);
+	const dropdownRef = useRef(null);
+
+	useClickOutside(dropdownRef, () => setOpen(false));
 
 	function handleSort(value) {
 		const params = new URLSearchParams(searchParams);
-
 		if (value) {
 			params.set('sort', value);
 		} else {
 			params.delete('sort');
 		}
-
+		params.delete('page');
 		router.replace(`${pathname}?${params.toString()}`, { scroll: false });
 		setOpen(false);
 	}
 
 	return (
-		<div className="relative mt-4 inline-block">
+		<div className="relative mt-4 inline-block" ref={dropdownRef}>
 			<button
-				onClick={() => setOpen(!open)}
+				onClick={(e) => {
+					e.stopPropagation();
+					setOpen((prev) => !prev);
+				}}
 				className="flex items-center rounded bg-beige px-4 py-2"
 			>
 				Sort: {sortOptions.find((opt) => opt.value === currentSort)?.label || 'None'}
