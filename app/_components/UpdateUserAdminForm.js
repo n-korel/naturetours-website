@@ -2,10 +2,10 @@
 
 import { useRef, useState } from 'react';
 import toast from 'react-hot-toast';
-import { updateUser } from '../_lib/actions';
+import { updateAdminUser, updateUser } from '../_lib/actions';
 import SubmitButton from './SubmitButton';
 
-export default function UserProfileForm({ user }) {
+export default function UpdateUserAdminForm({ user, setShowModalUpdate }) {
 	const [name, setName] = useState(user.name);
 	const [email, setEmail] = useState(user.email);
 	const [photoPreview, setPhotoPreview] = useState(user.photo);
@@ -30,25 +30,27 @@ export default function UserProfileForm({ user }) {
 			formData.append('photo', photoFile);
 		}
 
-		const result = await updateUser(formData);
+		const result = await updateAdminUser(formData, user._id);
 
 		if (result.success) {
 			toast.success(result.message);
+			router.refresh();
+			setShowModalUpdate(false);
 		} else {
 			toast.error(result.message);
 		}
 	};
 
 	return (
-		<div className="rounded-2xl border border-slate-300 p-8 shadow-lg">
+		<div className="p-8">
 			<h2 className="mb-6 text-center text-3xl font-bold text-gray-800 md:text-left">
-				Your Account
+				{user.name}
 			</h2>
 
 			<form onSubmit={handleSubmit} className="flex flex-col gap-10 md:flex-row md:items-start">
 				<div className="flex flex-col items-center gap-4">
 					<img
-						src={photoPreview}
+						src={`/img/users/${photoPreview}`}
 						alt="User avatar"
 						className="h-36 w-36 rounded-full object-cover shadow-md"
 						referrerPolicy="no-referrer"
@@ -93,7 +95,15 @@ export default function UserProfileForm({ user }) {
 						/>
 					</div>
 
-					<div className="flex justify-end">
+					<div className="flex justify-end gap-5">
+						<button
+							type="button"
+							onClick={() => setShowModalUpdate(false)}
+							className="w-36 rounded-3xl border border-gray-400 bg-white px-4 py-2 text-sm font-semibold text-textdark transition hover:opacity-80 disabled:opacity-80 sm:text-lg"
+						>
+							Cancel
+						</button>
+
 						<SubmitButton
 							pendingLabel="Saving..."
 							className="w-40 rounded-3xl bg-orange py-3 font-semibold text-white transition hover:bg-opacity-80 disabled:bg-opacity-80"

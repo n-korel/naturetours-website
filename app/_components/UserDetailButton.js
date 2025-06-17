@@ -4,10 +4,10 @@ import { EllipsisVertical } from 'lucide-react';
 import { useRef, useState } from 'react';
 import Modal from './Modal';
 import useClickOutside from './hooks/useClickOutside';
-import UpdateTourForm from './UpdateTourForm';
-import DeleteTourForm from './DeleteTourForm';
+import UpdateUserAdminForm from './UpdateUserAdminForm';
+import DeleteUserAdminForm from './DeleteUserAdminForm';
 
-export default function TourDetailButton({ isOpen, onToggle, tour }) {
+export default function UserDetailButton({ isOpen, onToggle, user }) {
 	const [showModalUpdate, setShowModalUpdate] = useState(false);
 	const [showModalDelete, setShowModalDelete] = useState(false);
 	const menuRef = useRef(null);
@@ -34,26 +34,26 @@ export default function TourDetailButton({ isOpen, onToggle, tour }) {
 						className="cursor-pointer px-4 py-2 hover:bg-gray-100"
 						onClick={() => setShowModalUpdate(true)}
 					>
-						Update tour
+						Update User
 					</li>
 					<li
 						className="cursor-pointer px-4 py-2 hover:bg-gray-100"
 						onClick={() => setShowModalDelete(true)}
 					>
-						Delete Tour
+						Delete User
 					</li>
 				</ul>
 			)}
 
 			{showModalUpdate && (
 				<Modal onClose={() => setShowModalUpdate(false)} width={'max-w-3xl'}>
-					<UpdateTourForm tour={tour} setShowModalUpdate={setShowModalUpdate} />
+					<UpdateUserAdminForm user={user} setShowModalUpdate={setShowModalUpdate} />
 				</Modal>
 			)}
 
 			{showModalDelete && (
 				<Modal onClose={() => setShowModalDelete(false)} width={'max-w-xl'}>
-					<DeleteTourForm tour={tour} setShowModalDelete={setShowModalDelete} />
+					<DeleteUserAdminForm user={user} setShowModalDelete={setShowModalDelete} />
 				</Modal>
 			)}
 		</div>

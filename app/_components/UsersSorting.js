@@ -8,16 +8,10 @@ import useClickOutside from './hooks/useClickOutside';
 const sortOptions = [
 	{ label: 'Alphabetical (A-Z)', value: 'name' },
 	{ label: 'Alphabetical (Z-A)', value: '-name' },
-	{ label: 'Date (Newest)', value: '-startDates' },
-	{ label: 'Duration (Shortest)', value: 'duration' },
-	{ label: 'Duration (Longest)', value: '-duration' },
-	{ label: 'Price (Lowest)', value: 'price' },
-	{ label: 'Price (Highest)', value: '-price' },
-	{ label: 'Rating (Lowest)', value: 'ratingsAverage' },
-	{ label: 'Rating (Highest)', value: '-ratingsAverage' },
+	{ label: 'User Role', value: 'role' },
 ];
 
-export default function Sorting() {
+export default function UsersSorting() {
 	const router = useRouter();
 	const pathname = usePathname();
 	const searchParams = useSearchParams();

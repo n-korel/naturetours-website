@@ -208,6 +208,34 @@ export const getCurrentUser = async function () {
 	return user;
 };
 
+export const getAllUsers = async function (page, limit, sort) {
+	try {
+		const cookieStore = cookies();
+		const token = cookieStore.get('token');
+
+		if (!token) return { reviews: [], total: 0 };
+
+		const res = await fetch(`${API_URL}api/v1/users?page=${page}&limit=${limit}&sort=${sort}`, {
+			headers: {
+				Authorization: `Bearer ${token.value}`,
+			},
+			next: { revalidate: 60 },
+		});
+
+		if (!res.ok) return { reviews: [], total: 0 };
+
+		const json = await res.json();
+
+		const users = json.data?.data || [];
+		const total = json.results || 0;
+
+		return { users, total };
+	} catch (error) {
+		console.error(error);
+		return null;
+	}
+};
+
 export const getAllReviews = async function (page, limit) {
 	try {
 		const cookieStore = cookies();

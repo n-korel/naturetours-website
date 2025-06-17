@@ -256,14 +256,6 @@ export async function addReview(formData, tourId) {
 
 export async function createNewTour(formData) {
 	try {
-		const name = formData.get('name');
-		const duration = formData.get('duration');
-		const maxGroupSize = formData.get('maxGroupSize');
-		const difficulty = formData.get('difficulty');
-		const price = formData.get('price');
-		const summary = formData.get('summary');
-		const imageCover = formData.get('imageCover');
-
 		const cookieStore = cookies();
 		const token = cookieStore.get('token');
 
@@ -273,16 +265,8 @@ export async function createNewTour(formData) {
 
 		const res = await fetch(`${API_URL}api/v1/tours`, {
 			method: 'POST',
-			headers: { Authorization: `Bearer ${token.value}`, 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				name,
-				duration,
-				maxGroupSize,
-				difficulty,
-				price,
-				summary,
-				imageCover,
-			}),
+			headers: { Authorization: `Bearer ${token.value}` },
+			body: formData,
 		});
 
 		if (!res.ok) {
@@ -291,22 +275,15 @@ export async function createNewTour(formData) {
 
 		revalidatePath('/management');
 
-		return { success: true, message: 'Create successful!' };
+		return { success: true, message: 'Tour created successfully!' };
 	} catch (error) {
 		console.error(error);
 		return { success: false, message: 'Something went wrong' };
 	}
 }
-export async function updateTour(formData, tourId) {
-	try {
-		const name = formData.get('name');
-		const duration = formData.get('duration');
-		const maxGroupSize = formData.get('maxGroupSize');
-		const difficulty = formData.get('difficulty');
-		const price = formData.get('price');
-		const summary = formData.get('summary');
-		const imageCover = formData.get('imageCover');
 
+export async function updateNewTour(formData, tourId) {
+	try {
 		const cookieStore = cookies();
 		const token = cookieStore.get('token');
 
@@ -315,17 +292,9 @@ export async function updateTour(formData, tourId) {
 		}
 
 		const res = await fetch(`${API_URL}api/v1/tours/${tourId}`, {
-			method: 'POST',
-			headers: { Authorization: `Bearer ${token.value}`, 'Content-Type': 'application/json' },
-			body: JSON.stringify({
-				name,
-				duration,
-				maxGroupSize,
-				difficulty,
-				price,
-				summary,
-				imageCover,
-			}),
+			method: 'PATCH',
+			headers: { Authorization: `Bearer ${token.value}` },
+			body: formData,
 		});
 
 		if (!res.ok) {
@@ -334,12 +303,13 @@ export async function updateTour(formData, tourId) {
 
 		revalidatePath('/management');
 
-		return { success: true, message: 'Sign up successful!' };
+		return { success: true, message: 'Tour updated successfully!' };
 	} catch (error) {
 		console.error(error);
 		return { success: false, message: 'Something went wrong' };
 	}
 }
+
 export async function deleteTour(tourId) {
 	try {
 		const cookieStore = cookies();
@@ -359,6 +329,68 @@ export async function deleteTour(tourId) {
 		}
 
 		revalidatePath('/management');
+
+		return { success: true, message: 'Delete successful!' };
+	} catch (error) {
+		console.error(error);
+		return { success: false, message: 'Something went wrong' };
+	}
+}
+
+export async function updateAdminUser(formData, userId) {
+	try {
+		const name = formData.get('name');
+		const email = formData.get('email');
+		const photo = formData.get('photo');
+
+		const cookieStore = cookies();
+		const token = cookieStore.get('token');
+
+		if (!token?.value) {
+			return { success: false, message: 'Not authenticated' };
+		}
+
+		const body = new FormData();
+		body.append('name', name);
+		body.append('email', email);
+		body.append('photo', photo);
+
+		const res = await fetch(`${API_URL}api/v1/users/${userId}`, {
+			method: 'PATCH',
+			headers: { Authorization: `Bearer ${token.value}` },
+			body: body,
+		});
+
+		if (!res.ok) {
+			return { success: false, message: 'Invalid name, email or photo' };
+		}
+
+		revalidatePath('/management/users');
+
+		return { success: true, message: 'Change successful!' };
+	} catch (error) {
+		console.error(error);
+		return { success: false, message: 'Something went wrong' };
+	}
+}
+
+export async function deleteAdminUser(userId) {
+	try {
+		const cookieStore = cookies();
+		const token = cookieStore.get('token');
+
+		if (!token?.value) {
+			return { success: false, message: 'Not authenticated' };
+		}
+
+		const res = await fetch(`${API_URL}api/v1/users/${userId}`, {
+			method: 'DELETE',
+			headers: { Authorization: `Bearer ${token.value}` },
+		});
+
+		if (!res.ok) {
+			return { success: false, message: 'Delete error' };
+		}
 
 		return { success: true, message: 'Delete successful!' };
 	} catch (error) {
