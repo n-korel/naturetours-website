@@ -1,4 +1,4 @@
-import { getCurrentUser, getTour, getTourId, getTours, getToursSSG } from '@/app/_lib/data-service';
+import { getCurrentUser, getTour, getTourId, getToursSSG } from '@/app/_lib/data-service';
 
 import ImageGallery from '@/app/_components/ImageGallery';
 import MainImage from '@/app/_components/MainImage';

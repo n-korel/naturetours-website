@@ -6,9 +6,11 @@ import Link from 'next/link';
 import { signupUser } from '../_lib/actions';
 import { signInAction } from '../_lib/actions';
 import SubmitButton from './SubmitButton';
+import { useRouter } from 'next/navigation';
 
 export default function SignupForm() {
 	const formRef = useRef();
+	const router = useRouter();
 
 	async function handleSubmit(e) {
 		e.preventDefault();

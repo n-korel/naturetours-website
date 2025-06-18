@@ -236,14 +236,14 @@ export const getAllUsers = async function (page, limit, sort) {
 	}
 };
 
-export const getAllReviews = async function (page, limit) {
+export const getAllReviews = async function (page, limit, sort = 0) {
 	try {
 		const cookieStore = cookies();
 		const token = cookieStore.get('token');
 
 		if (!token) return { reviews: [], total: 0 };
 
-		const res = await fetch(`${API_URL}api/v1/reviews?page=${page}&limit=${limit}`, {
+		const res = await fetch(`${API_URL}api/v1/reviews?page=${page}&limit=${limit}&sort=${sort}`, {
 			headers: {
 				Authorization: `Bearer ${token.value}`,
 			},

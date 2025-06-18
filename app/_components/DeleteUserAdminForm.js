@@ -1,13 +1,20 @@
+'use client';
+
+import toast from 'react-hot-toast';
 import { deleteAdminUser } from '../_lib/actions';
 import SubmitButton from './SubmitButton';
+import { useRouter } from 'next/navigation';
 
 export default function DeleteUserAdminForm({ user, setShowModalDelete }) {
+	const router = useRouter();
+
 	const handleDelete = async (e) => {
 		e.preventDefault();
 		const result = await deleteAdminUser(user._id);
 
 		if (result.success) {
 			toast.success(result.message);
+			setShowModalDelete(false);
 			router.push('/management/users');
 		} else {
 			toast.error(result.message);

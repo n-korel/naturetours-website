@@ -2,8 +2,9 @@
 
 import { useRef, useState } from 'react';
 import toast from 'react-hot-toast';
-import { updateAdminUser, updateUser } from '../_lib/actions';
+import { updateAdminUser } from '../_lib/actions';
 import SubmitButton from './SubmitButton';
+import { useRouter } from 'next/navigation';
 
 export default function UpdateUserAdminForm({ user, setShowModalUpdate }) {
 	const [name, setName] = useState(user.name);
@@ -11,6 +12,7 @@ export default function UpdateUserAdminForm({ user, setShowModalUpdate }) {
 	const [photoPreview, setPhotoPreview] = useState(user.photo);
 	const [photoFile, setPhotoFile] = useState(null);
 	const fileInputRef = useRef(null);
+	const router = useRouter();
 
 	const handlePhotoChange = (e) => {
 		const file = e.target.files[0];

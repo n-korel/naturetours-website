@@ -4,6 +4,10 @@ import { useState } from 'react';
 export default function ReviewText({ text }) {
 	const [isExpanded, setIsExpanded] = useState(false);
 
+	if (!text) {
+		return <p className="text-sm text-gray-600">No review text</p>;
+	}
+
 	const toggleExpanded = () => {
 		setIsExpanded((prev) => !prev);
 	};

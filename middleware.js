@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import { auth } from './app/_lib/auth';
 
 export async function middleware(request) {
 	const token = request.cookies.get('token')?.value;

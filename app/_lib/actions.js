@@ -398,3 +398,63 @@ export async function deleteAdminUser(userId) {
 		return { success: false, message: 'Something went wrong' };
 	}
 }
+
+export async function updateAdminReview(formData, userId) {
+	try {
+		const review = formData.get('review');
+		const rating = formData.get('rating');
+
+		const cookieStore = cookies();
+		const token = cookieStore.get('token');
+
+		if (!token?.value) {
+			return { success: false, message: 'Not authenticated' };
+		}
+
+		const body = new FormData();
+		body.append('review', review);
+		body.append('rating', rating);
+
+		const res = await fetch(`${API_URL}api/v1/reviews/${userId}`, {
+			method: 'PATCH',
+			headers: { Authorization: `Bearer ${token.value}` },
+			body: body,
+		});
+
+		if (!res.ok) {
+			return { success: false, message: 'Invalid review or rating' };
+		}
+
+		revalidatePath('/management/reviews');
+
+		return { success: true, message: 'Change successful!' };
+	} catch (error) {
+		console.error(error);
+		return { success: false, message: 'Something went wrong' };
+	}
+}
+
+export async function deleteAdminReview(reviewId) {
+	try {
+		const cookieStore = cookies();
+		const token = cookieStore.get('token');
+
+		if (!token?.value) {
+			return { success: false, message: 'Not authenticated' };
+		}
+
+		const res = await fetch(`${API_URL}api/v1/reviews/${reviewId}`, {
+			method: 'DELETE',
+			headers: { Authorization: `Bearer ${token.value}` },
+		});
+
+		if (!res.ok) {
+			return { success: false, message: 'Delete error' };
+		}
+
+		return { success: true, message: 'Delete successful!' };
+	} catch (error) {
+		console.error(error);
+		return { success: false, message: 'Something went wrong' };
+	}
+}

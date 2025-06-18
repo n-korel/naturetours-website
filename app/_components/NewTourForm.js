@@ -56,7 +56,7 @@ export default function NewTourForm() {
 			>
 				<div className="flex flex-col items-center gap-4">
 					<img
-						src={preview || '/placeholder.jpg'}
+						src={'/img/tours/tour-1-1.jpg'}
 						alt="Preview"
 						className="h-36 w-36 rounded-full object-cover shadow-md"
 						referrerPolicy="no-referrer"

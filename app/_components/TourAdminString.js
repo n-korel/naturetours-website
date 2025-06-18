@@ -1,3 +1,5 @@
+'use client';
+
 import { format } from 'date-fns';
 import TourDetailButton from './TourDetailButton';
 

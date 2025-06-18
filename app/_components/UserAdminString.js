@@ -1,6 +1,8 @@
+'use client';
+
 import UserDetailButton from './UserDetailButton';
 
-export default async function UserAdminString({ user, isOpen, onToggle }) {
+export default function UserAdminString({ user, isOpen, onToggle }) {
 	return (
 		<div className="flex border border-t border-gray-200 text-base font-normal text-textdark">
 			<div className="flex flex-1 items-center gap-5 whitespace-nowrap border p-2 text-lg font-medium">

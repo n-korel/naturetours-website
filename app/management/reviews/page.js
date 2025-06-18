@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
-import ReviewList from '@/app/_components/ReviewList';
 import Spinner from '@/app/_components/Spinner';
+import ReviewAdminTable from '@/app/_components/ReviewAdminTable';
+import ReviewsSorting from '@/app/_components/ReviewsSorting';
 
 export const metadata = {
 	title: 'Reviews',
@@ -8,11 +9,15 @@ export const metadata = {
 
 export default function Page({ searchParams }) {
 	return (
-		<div className="mx-auto flex max-w-7xl items-center justify-between px-6">
-			<div>Reviews</div>
-			{/* 		<Suspense fallback={<Spinner />} key={JSON.stringify(searchParams)}>
-			<ReviewList searchParams={searchParams} />
-		</Suspense> */}
-		</div>
+		<main className="bg-beige pb-10 font-sans text-textdark">
+			<div className="flex items-center justify-between pb-5">
+				<div className="pl-3 text-3xl">All Reviews</div>
+				<ReviewsSorting />
+			</div>
+
+			<Suspense fallback={<Spinner />} key={JSON.stringify(searchParams)}>
+				<ReviewAdminTable searchParams={searchParams} />
+			</Suspense>
+		</main>
 	);
 }
