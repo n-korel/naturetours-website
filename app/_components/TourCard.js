@@ -2,9 +2,7 @@ import Image from 'next/image';
 import clsx from 'clsx';
 import { format } from 'date-fns';
 import Link from 'next/link';
-import { Calendar, Clock, Globe2, Globe2Icon, Star } from 'lucide-react';
-
-// const BASE_IMAGE_URL = process.env.NEXT_PUBLIC_API_URL;
+import { Calendar, Clock, Globe2, Star } from 'lucide-react';
 
 const difficultyColors = {
 	easy: 'bg-[#809c7e]',

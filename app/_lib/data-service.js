@@ -262,3 +262,29 @@ export const getAllReviews = async function (page, limit, sort = 0) {
 		return null;
 	}
 };
+
+export const getBookings = async function () {
+	try {
+		const cookieStore = cookies();
+		const token = cookieStore.get('token');
+
+		if (!token) return { reviews: [], total: 0 };
+
+		const res = await fetch(`${API_URL}api/v1/bookings/my-tours`, {
+			headers: {
+				Authorization: `Bearer ${token.value}`,
+			},
+		});
+
+		if (!res.ok) return { tours: [] };
+
+		const json = await res.json();
+
+		const tours = json.data?.tours || [];
+
+		return tours;
+	} catch (error) {
+		console.error(error);
+		return null;
+	}
+};

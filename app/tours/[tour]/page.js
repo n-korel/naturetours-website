@@ -8,6 +8,7 @@ import ReviewsCarousel from '@/app/_components/ReviewsCarousel';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import ReviewForm from '@/app/_components/ReviewForm';
+import BookingButton from '@/app/_components/BookingButton';
 
 const Map = dynamic(() => import('@/app/_components/Map'), {
 	ssr: false, // Leaflet требует отключить SSR
@@ -60,14 +61,7 @@ export default async function Page({ params }) {
 					<FactsTour tour={tour} />
 
 					<div className="flex justify-center">
-						{user && user.role === 'user' && (
-							<Link
-								href={`/tours/${tour.slug}/booking`}
-								className="flex w-72 items-center justify-center rounded-3xl bg-forest px-6 py-3 uppercase text-white transition hover:bg-opacity-90"
-							>
-								Book tour now!
-							</Link>
-						)}
+						{user && user.role === 'user' && <BookingButton tourId={tourId.id} />}
 					</div>
 				</div>
 			</section>
