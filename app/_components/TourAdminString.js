@@ -6,7 +6,7 @@ import TourDetailButton from './TourDetailButton';
 export default function TourAdminString({ tour, isOpen, onToggle }) {
 	return (
 		<div className="flex border border-t border-gray-200 text-base font-normal text-textdark">
-			<div className="flex flex-1 items-center whitespace-nowrap border p-2 font-medium">
+			<div className="flex min-w-0 flex-1 items-center break-words border p-2 font-medium">
 				{tour.name ?? 'Tour'}
 			</div>
 			<div className="flex flex-1 items-center border p-2">

@@ -1,6 +1,9 @@
 import Image from 'next/image';
 import naturetours from '@/public/naturetours.jpg';
 import Link from 'next/link';
+import TravelCategories from './_components/TravelCategories';
+import HotOffer from './_components/HotOffer';
+import Top5CheapTours from './_components/Top5CheapTours';
 
 export default function Page() {
 	return (
@@ -31,6 +34,9 @@ export default function Page() {
 					</div>
 				</div>
 			</section>
+			<TravelCategories />
+			<HotOffer />
+			<Top5CheapTours />
 		</main>
 	);
 }

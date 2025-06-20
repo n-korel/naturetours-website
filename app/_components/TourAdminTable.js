@@ -15,7 +15,7 @@ export default async function TourAdminTable({ searchParams }) {
 		<div className="w-full">
 			<div className="rounded-xl border border-gray-200">
 				<div className="flex rounded-t-lg bg-gray-300 text-lg font-semibold text-textdark">
-					<div className="flex-1 border p-2">Tour</div>
+					<div className="min-w-0 flex-1 break-words border p-2">Tour</div>
 					<div className="flex-1 border p-2">Date</div>
 					<div className="flex-1 border p-2">Duration</div>
 					<div className="flex-1 border p-2">Difficulty</div>

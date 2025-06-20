@@ -10,7 +10,7 @@ function ReviewCard({ review }) {
 		<div className="w-[300px] flex-shrink-0 rounded-xl bg-lightgray p-4 shadow-md">
 			<div className="mb-2 flex items-center gap-3">
 				<Image
-					src={`/img/users/${review?.user?.photo}` ?? '/img/users/default.jpg'}
+					src={`/img/users/${review?.user?.photo}` ?? 'default.jpg'}
 					alt={review?.user?.name ?? review.id}
 					width={40}
 					height={40}

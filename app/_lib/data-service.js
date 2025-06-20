@@ -288,3 +288,23 @@ export const getBookings = async function () {
 		return null;
 	}
 };
+
+export const getTop5CheapTours = async function () {
+	try {
+		const res = await fetch(`${API_URL}api/v1/tours/top-5-cheap`, {
+			next: { revalidate: 60 },
+		});
+
+		if (!res.ok) {
+			return null;
+		}
+
+		const json = await res.json();
+		const tours = json.data?.data;
+
+		return tours;
+	} catch (error) {
+		console.error(error);
+		return null;
+	}
+};

@@ -18,7 +18,7 @@ function Footer() {
 					</button>
 				</form>
 
-				<p className="mt-10 text-sm text-lightgray">© 2025 by Nick Korelskiy</p>
+				<p className="mt-10 text-sm text-lightgray">© 2025 by Nick Korelsky</p>
 			</div>
 		</footer>
 	);
