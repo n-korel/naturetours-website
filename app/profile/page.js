@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import DeleteUserButton from '../_components/DeleteUserButton';
 import PasswordProfileForm from '../_components/PasswordProfileForm';
 import UserProfileForm from '../_components/UserProfileForm';

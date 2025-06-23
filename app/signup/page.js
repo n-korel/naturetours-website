@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import SignupForm from '../_components/SignupForm';
 
 export const metadata = {

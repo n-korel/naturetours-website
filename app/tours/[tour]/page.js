@@ -1,12 +1,10 @@
+export const dynamic = 'force-dynamic';
 import { getCurrentUser, getTour, getTourId, getToursSSG } from '@/app/_lib/data-service';
-
 import ImageGallery from '@/app/_components/ImageGallery';
 import MainImage from '@/app/_components/MainImage';
 import FactsTour from '@/app/_components/FactsTour';
-import dynamic from 'next/dynamic';
 import ReviewsCarousel from '@/app/_components/ReviewsCarousel';
 import { notFound } from 'next/navigation';
-import Link from 'next/link';
 import ReviewForm from '@/app/_components/ReviewForm';
 import BookingButton from '@/app/_components/BookingButton';
 

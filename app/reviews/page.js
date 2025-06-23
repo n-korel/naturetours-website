@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import Image from 'next/image';
 import reviews from '@/public/reviews.jpg';
 import ReviewList from '../_components/ReviewList';

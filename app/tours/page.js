@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { Suspense } from 'react';
 import Filters from '../_components/Filters';
 import TourList from '../_components/TourList';
