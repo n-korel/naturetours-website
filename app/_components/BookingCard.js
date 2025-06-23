@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import clsx from 'clsx';
 import { format } from 'date-fns';
-import Link from 'next/link';
 import { Calendar, Clock, Globe2, Star } from 'lucide-react';
 import { getTour } from '../_lib/data-service';
 

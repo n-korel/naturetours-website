@@ -9,7 +9,7 @@ export const metadata = {
 
 export default async function Page() {
 	const user = await getCurrentUser();
-
+	if (!user) return <p className="p-10 text-xl">Нет данных о пользователе</p>;
 	return (
 		<div className="mx-auto flex h-full max-w-5xl flex-col justify-center gap-7 pt-[80px]">
 			<UserProfileForm user={user} />
