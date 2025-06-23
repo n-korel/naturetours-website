@@ -1,4 +1,5 @@
 export const dynamic = 'force-dynamic';
+
 import { Suspense } from 'react';
 import Spinner from '../_components/Spinner';
 import Sorting from '../_components/Sorting';

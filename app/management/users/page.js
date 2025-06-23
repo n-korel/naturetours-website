@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import Spinner from '@/app/_components/Spinner';
 import UsersAdminTable from '@/app/_components/UsersAdminTable';
 import UsersSorting from '@/app/_components/UsersSorting';

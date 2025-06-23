@@ -4,17 +4,21 @@ import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { useEffect, useState } from 'react';
-import { Compass } from 'lucide-react';
 
-// Иконки по умолчанию
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
-	iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon-2x.png',
-	iconUrl: 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon.png',
-	shadowUrl: 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-shadow.png',
-});
+// ✅ Настройка иконок Leaflet только на клиенте
+function useLeafletIcons() {
+	useEffect(() => {
+		delete L.Icon.Default.prototype._getIconUrl;
 
-// Компонент кнопки и логики геолокации
+		L.Icon.Default.mergeOptions({
+			iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon-2x.png',
+			iconUrl: 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon.png',
+			shadowUrl: 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-shadow.png',
+		});
+	}, []);
+}
+
+// 🔘 Компонент кнопки геолокации
 const LocateControl = ({ setUserPosition }) => {
 	const map = useMap();
 
@@ -24,12 +28,14 @@ const LocateControl = ({ setUserPosition }) => {
 		locateBtn.onAdd = () => {
 			const div = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
 			div.innerHTML = '🧭';
-			div.style.width = '34px';
-			div.style.height = '34px';
-			div.style.lineHeight = '34px';
-			div.style.textAlign = 'center';
-			div.style.cursor = 'pointer';
-			div.style.background = 'white';
+			Object.assign(div.style, {
+				width: '34px',
+				height: '34px',
+				lineHeight: '34px',
+				textAlign: 'center',
+				cursor: 'pointer',
+				background: 'white',
+			});
 			div.title = 'Показать мое местоположение';
 
 			div.onclick = () => {
@@ -64,9 +70,16 @@ const LocateControl = ({ setUserPosition }) => {
 	return null;
 };
 
+// 📌 Основной компонент карты
 export default function Map({ locations }) {
+	useLeafletIcons(); // ✅ Применяем клиентскую инициализацию
 	const [userPosition, setUserPosition] = useState(null);
-	const center = [locations[0].coordinates[1], locations[0].coordinates[0]];
+
+	// Центр карты — первая точка маршрута
+	const center = [
+		locations[0].coordinates[1], // latitude
+		locations[0].coordinates[0], // longitude
+	];
 
 	return (
 		<div className="h-[600px] w-full overflow-hidden rounded-lg">
@@ -76,17 +89,18 @@ export default function Map({ locations }) {
 					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 				/>
 
+				{/* Маркеры тура */}
 				{locations.map((loc) => {
 					const icon = L.divIcon({
 						className: 'custom-div-icon',
 						html: `
-                                <div class="text-center">
-                                    <div class="bg-white px-2 py-1 text-xs font-semibold rounded shadow-md">
-                                    День ${loc.day}: ${loc.description}
-                                    </div>
-                                    <img src="https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon.png" />
-                                </div>
-                                `,
+							<div class="text-center">
+								<div class="bg-white px-2 py-1 text-xs font-semibold rounded shadow-md">
+									День ${loc.day}: ${loc.description}
+								</div>
+								<img src="https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon.png" />
+							</div>
+						`,
 						iconSize: [120, 40],
 						iconAnchor: [15, 40],
 					});
@@ -96,25 +110,27 @@ export default function Map({ locations }) {
 					);
 				})}
 
+				{/* Маркер пользователя */}
 				{userPosition && (
 					<Marker
 						position={userPosition}
 						icon={L.divIcon({
 							className: 'user-icon',
 							html: `
-                <div class="text-center">
-                  <div class="bg-blue-500 text-white px-2 py-1 rounded shadow text-xs">
-                    Вы здесь
-                  </div>
-                  <img src="https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon.png" />
-                </div>
-              `,
+								<div class="text-center">
+									<div class="bg-blue-500 text-white px-2 py-1 rounded shadow text-xs">
+										Вы здесь
+									</div>
+									<img src="https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon.png" />
+								</div>
+							`,
 							iconSize: [100, 40],
 							iconAnchor: [15, 40],
 						})}
 					/>
 				)}
 
+				{/* Кнопка геолокации */}
 				<LocateControl setUserPosition={setUserPosition} />
 			</MapContainer>
 		</div>
