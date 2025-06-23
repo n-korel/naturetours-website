@@ -6,47 +6,46 @@ import FAQItem from './FAQItem';
 
 const faq = [
 	{
-		title: 'Bookings',
+		title: 'Бронирование',
 		questions: [
 			{
-				question: 'Why has the price for the trip changed?',
+				question: 'Почему изменилась цена поездки?',
 				answer:
-					"We regret to inform you that you've missed out this time. Our special offers are available for a limited duration, and to secure great deals, it\'as essential to act promptly. Ensure you've subscribed to our email newsletter to stay informed about upcoming sales and promotions.",
+					'С сожалением сообщаем вам, что вы упустили это время. Наши специальные предложения доступны в течение ограниченного периода времени, и чтобы обеспечить выгодные предложения, необходимо действовать быстро. Убедитесь, что вы подписались на нашу рассылку по электронной почте, чтобы быть в курсе предстоящих распродаж и акций.',
 			},
 			{
-				question: 'Booking an individual room',
+				question: 'Бронирование индивидуального тура',
 				answer:
-					'Yes, individual room bookings are possible, but they are subject to availability and may incur an additional charge. If you prefer not to share a room, make sure to select the “single room” option during checkout.',
+					'Да, бронирование отдельных туров возможно, но оно зависит от наличия свободных гидов и может повлечь за собой дополнительную плату.',
 			},
 			{
-				question: 'Booking an extras',
+				question: 'Бронирование дополнительных услуг',
 				answer:
-					'Extras such as travel insurance, guided tours, and airport transfers can be added during the booking process. Some extras may have limited availability, so we recommend adding them as early as possible to secure your spot.',
+					'Дополнительные услуги, такие как туристическая страховка, экскурсии и трансферы из аэропорта, можно добавить во время процесса бронирования. Некоторые дополнительные услуги могут быть доступны в ограниченном количестве, поэтому мы рекомендуем добавлять их как можно раньше, чтобы зарезервировать себе место.',
 			},
 			{
-				question: 'Trip cancellations and refund',
+				question: 'Отмена поездки и возврат денег',
 				answer:
-					'Our cancellation policy allows for a full or partial refund depending on how far in advance you cancel. Cancellations made 30+ days prior to departure typically receive a full refund, minus any non-refundable fees. Please read our cancellation terms carefully before booking.',
+					'Наша политика отмены позволяет полный или частичный возврат средств в зависимости от того, насколько заранее вы отменяете бронирование. Отмены, сделанные за 30+ дней до отправления, обычно предусматривают полный возврат средств за вычетом любых невозвращаемых сборов. Пожалуйста, внимательно прочтите наши условия отмены перед бронированием.',
 			},
 		],
 	},
 	{
-		title: 'Payments',
+		title: 'Оплата',
 		questions: [
 			{
-				question: 'Can I pay by debit card?',
+				question: 'Могу ли я оплатить дебетовой картой?',
 				answer:
-					"Absolutely. We accept most major debit cards, including Visa and Mastercard. Just make sure your card has sufficient funds and international payments enabled if you're booking from outside the country.",
+					'Конечно. Мы принимаем большинство основных дебетовых карт, включая Visa и Mastercard. Просто убедитесь, что на вашей карте достаточно средств и разрешены международные платежи, если вы бронируете из-за границы.',
 			},
 			{
-				question: 'Why do I need to make full payment?',
+				question: 'Почему мне необходимо вносить полную оплату?',
 				answer:
-					'Full payment secures your spot and allows us to make necessary arrangements like hotel bookings, permits, and local transportation. It also helps us maintain lower prices by avoiding last-minute changes and uncertainties.',
+					'Полная оплата гарантирует вам место и позволяет нам сделать необходимые приготовления, такие как бронирование отелей, разрешений и местного транспорта. Это также помогает нам поддерживать более низкие цены, избегая изменений и неопределенностей в последнюю минуту.',
 			},
 			{
-				question: 'Discounts and vouchers',
-				answer:
-					'We frequently offer discounts via our newsletter or social media. If you have a voucher code, you can enter it at checkout to redeem your discount. Only one voucher can be used per booking unless stated otherwise.',
+				question: 'Скидки',
+				answer: 'Мы часто предлагаем скидки через нашу рассылку или социальные сети.',
 			},
 		],
 	},
@@ -54,19 +53,19 @@ const faq = [
 		title: 'COVID-19',
 		questions: [
 			{
-				question: 'Are there vaccination requirements for trips?',
+				question: 'Существуют ли требования по вакцинации для поездок?',
 				answer:
-					'Some destinations require proof of vaccination depending on local regulations. We recommend checking the travel advisories of your destination country and ensuring your vaccinations are up to date before traveling.',
+					'Некоторые направления требуют доказательства вакцинации в зависимости от местных правил. Мы рекомендуем вам ознакомиться с рекомендациями по путешествиям в вашей стране назначения и убедиться, что ваши прививки актуальны перед поездкой.',
 			},
 			{
-				question: 'Do I have to wear a mask while travelling?',
+				question: 'Обязательно ли носить маску во время путешествия?',
 				answer:
-					'Mask requirements vary by destination and local health guidelines. While many countries have lifted mandates, we still encourage wearing masks in crowded or enclosed spaces for your safety and that of others.',
+					'Требования к ношению масок различаются в зависимости от места назначения и местных рекомендаций по охране здоровья. Хотя многие страны отменили требования, мы по-прежнему рекомендуем носить маски в многолюдных или закрытых помещениях для вашей безопасности и безопасности других.',
 			},
 			{
-				question: 'Am I eligible for refund if I feel unwell?',
+				question: 'Имею ли я право на возврат денег, если я плохо себя чувствую?',
 				answer:
-					'If you test positive for COVID-19 or feel unwell before departure, please contact us immediately. Depending on your circumstances and the timing, you may be eligible for a refund or travel credit. We recommend purchasing travel insurance that includes COVID-related coverage.',
+					'Если у вас положительный результат теста на COVID-19 или вы плохо себя чувствуете перед вылетом, пожалуйста, свяжитесь с нами немедленно. В зависимости от ваших обстоятельств и времени, вы можете иметь право на возврат или туристический кредит. Мы рекомендуем приобрести туристическую страховку, которая включает покрытие, связанное с COVID.',
 			},
 		],
 	},
